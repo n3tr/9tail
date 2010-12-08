@@ -9,9 +9,11 @@
 	</head>
 	<body id="success_register" onload="">
 		<div>
-			your register was success
-			Please, Waiting for Confirmation Email then Click the link to Activate your Account
-			Thank, 9tail.
+			<p>
+			your register was success <br/>
+			Please, Waiting for Confirmation Email then Click the link to Activate your Account<br/>
+			Thank you, 9tail.
+			</p>
 		</div>
 	</body>
 </html>
