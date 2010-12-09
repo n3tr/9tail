@@ -27,8 +27,44 @@ class Session extends Controller {
 			$this->load->view('login_view');
 		}
 		else {
-			
+				$email = $this->input->post('email');
+				$password = $this->input->post('password');
+				$password = $this->encrypt->decode($password);
+				$this->db->where('email', $email);
+				$this->db->where('password',$password);
+				$q = $this->db->get('user');
+				
+				if($q->num_rows() > 0){
+				$data = $q->first_row('array');
+					$this->add($data);
+				//	echo 'logged in';
+				}else {
+					// email or password not match
+					echo 'not found';
+				}
 		}
 	}
+	
+	function add($data)
+	{
+	
+		$session_data = array(
+				'email' => $data['email'],
+				'screen_name' => $data['screen_name'],
+				'firstname' => $data['firstname'],
+				'lastname' => $data['lastname'],
+				'logged_in' => TRUE
+				);
+		$this->session->set_userdata($session_data);
+			redirect('/');
+	}
+	
+	function destroy()
+	{
+		// Destroy User Session when User Log out
+		$this->session->unset_userdata('logged_in');
+		redirect('/');
+	}
+
 
 }

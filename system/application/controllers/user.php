@@ -13,6 +13,10 @@ class User extends Controller {
 	}
 	
 	function index() {
+		$userdata = $this->session->userdata('logged_in');
+		if($userdata == TRUE){
+			redirect('/profile/');
+		}
 		$this->login();
 	}
 	
@@ -103,6 +107,12 @@ class User extends Controller {
 				
 			}
 		}
+	}
+	
+	function login_submit()
+	{
+			// when user login
+		
 	}
 
 

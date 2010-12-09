@@ -10,7 +10,7 @@ class Profile extends Controller {
 	}
 	
 	function index() {
-		
+		$this->load->view('profile_view');
 	}
 
 }
