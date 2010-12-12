@@ -51,11 +51,16 @@ class User extends Controller {
 			$data['messages'] = $q->result('array');
 		
 			$this->load->view('owner_user_view',$data);
+			
 		}else if($this->uri->segment(2) == TRUE){
+		
+			
+				
 				$this->db->where('screen_name', $this->uri->segment(2));
 				$q = $this->db->get('user');
 				
 				if ($q->num_rows() > 0) {
+					
 					$user_data = $q->first_row('array');
 					$data['user_data'] = $user_data;
 					$this->db->where('screen_name', $userdata['screen_name']);
@@ -84,13 +89,28 @@ class User extends Controller {
 
 					$data['messages'] = $q->result('array');
 
-					$this->load->view('user_view',$data);
+					
+						$this->load->library('friendlib');
+					if ($this->friendlib->check_friend($userdata['user_id'],$user_data['id']) == 2){
+						$this->load->view('user_view',$data);
+						
+					}else if ($this->friendlib->check_friend($userdata['user_id'],$user_data['id']) == 1) {
+						echo "pendding request";
+					}else {
+						$this->load->view('user_not_friend',$data);
+						//echo "not friend";
+					}
+					
+					
+					
+		
+					
 				}else{
 					
 					echo "user not found";
 				}
-				
-				
+			
+					
 		}else{
 			echo "Something wrong !!";
 		}

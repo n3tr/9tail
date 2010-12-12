@@ -20,3 +20,15 @@ CREATE TABLE  `9tail_db`.`messages` (
 `text` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
 `datetime` DATETIME NOT NULL DEFAULT  '0000-00-00 00:00:00'
 ) ENGINE = MYISAM CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+CREATE TABLE  `9tail_db`.`friend` (
+`from` BIGINT( 20 ) UNSIGNED NOT NULL ,
+`to` BIGINT( 20 ) UNSIGNED NOT NULL ,
+`status` INT( 11 ) UNSIGNED NOT NULL DEFAULT  '0',
+`datetime` DATETIME NOT NULL
+) ENGINE = MYISAM CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+ALTER TABLE  `friend` ADD  `guid` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+ADD UNIQUE (
+`guid`
+)

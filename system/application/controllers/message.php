@@ -46,7 +46,7 @@ class Message extends Controller {
 				redirect('/user/');
 			}
 		}else{
-			echo 'error';
+			echo $userdata['logged_in']  . $userdata['user_id'] .$this->input->post('from');
 			
 		}
 		
