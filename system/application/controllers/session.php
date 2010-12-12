@@ -35,34 +35,49 @@ class Session extends Controller {
 				$q = $this->db->get('user');
 				
 				if($q->num_rows() > 0){
-				$data = $q->first_row('array');
-					$this->add($data);
-				//	echo 'logged in';
+					
+					$data = $q->first_row('array');
+					
+					// Check Status is user activate account
+					if ($data['status'] == 1){ 
+						$this->add($data);
+						
+					}else{
+						// user not activate account
+						
+						redirect('/login');
+					}
+				
 				}else {
 					// email or password not match
-					echo 'not found';
+			
+					redirect('/login');
+				
 				}
 		}
 	}
 	
 	function add($data)
 	{
-	
+		
 		$session_data = array(
+				'user_id' => $data['id'],
 				'email' => $data['email'],
 				'screen_name' => $data['screen_name'],
 				'firstname' => $data['firstname'],
 				'lastname' => $data['lastname'],
 				'logged_in' => TRUE
 				);
-		$this->session->set_userdata($session_data);
+		$this->session->set_userdata('userdata',$session_data);
+	
 			redirect('/');
+		
 	}
 	
 	function destroy()
 	{
 		// Destroy User Session when User Log out
-		$this->session->unset_userdata('logged_in');
+		$this->session->unset_userdata('userdata');
 		redirect('/');
 	}
 

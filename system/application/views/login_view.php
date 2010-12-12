@@ -33,7 +33,7 @@
 		?>
 		</div>
 		<?php
-		echo anchor('/user/register/','New User? Click Here to Register');
+		echo anchor('/signup','New User? Click Here to Register');
 		
 		?>
 	</body>

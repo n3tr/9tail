@@ -15,23 +15,35 @@
 		<img src='http://maps.google.com/maps/api/staticmap?center=40.714728,-73.998672&zoom=15&size=300x200&maptype=terrain&sensor=false' />
 		
 		<div>
-			<h3>User: <?php echo $owner_user['screen_name']; ?></h3>
-			<h4><?php echo $owner_user['firstname'] . ' ' . $owner_user['lastname'];?></h4>
+			<h3>User: <?php echo $user_data['screen_name']; ?></h3>
+			<h4><?php echo $user_data['firstname'] . ' ' . $user_data['lastname'];?></h4>
 		</div>
 		
 		<div>
 		<?php
 		$hidden = array(
-			'owner_id' => $owner_user['id'],
-			'user_id' => $owner_user['id']
+			'from' => $owner_data['id'],
+			'to' => $user_data['id']
 			);
 			echo form_open('/message/post','', $hidden);
-			echo form_textarea('post_text');
+			echo form_textarea('text');
 			echo form_submit('submit','Submit');
 			echo form_close();
 		?>
 		</div>
 		
+		<div id="name">
+			<ul>
+			<?php
+				foreach ($messages as $row) {
+					echo '<li>';
+					echo anchor('user/'.$row['screen_name'],$row['screen_name']); 
+					echo $row['text'] .' <i>'. $row['datetime'].'</i>' . '</li>';
+				}
+			
+			?>
+			</ul>
+		</div>
 	</body>
 	
 </html>
