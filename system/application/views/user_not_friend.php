@@ -17,7 +17,8 @@
 		<div>
 			<h3>User: <?php echo $user_data['screen_name']; ?></h3>
 			<h4><?php echo $user_data['firstname'] . ' ' . $user_data['lastname'];?></h4>
-			<?php echo anchor('/friend/request/' . $user_data['screen_name'],'Request Friend'); ?>
+			<h5><?php echo 'friend count' . $friend_count;?></h5>
+			<?php echo anchor('/friend/request_friend/' . $user_data['screen_name'],'Request Friend'); ?>
 		</div>
 		
 		<div>

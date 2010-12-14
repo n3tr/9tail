@@ -7,7 +7,7 @@ class User extends Controller {
 	//php 5 constructor
 	function __construct() {
 		parent::Controller();
-		
+		$this->load->library('friendlib');
 	}
 	
 	function index()
@@ -49,7 +49,7 @@ class User extends Controller {
 			//print_r($q->result('array'));die();
 		
 			$data['messages'] = $q->result('array');
-		
+			$data['friend_count'] = $this->friendlib->get_friend_count($userdata['user_id']);
 			$this->load->view('owner_user_view',$data);
 			
 		}else if($this->uri->segment(2) == TRUE){
@@ -85,17 +85,27 @@ class User extends Controller {
 					$this->db->order_by('datetime','desc'); 
 					$q = $this->db->get();
 
-					//print_r($q->result('array'));die();
+				//	print_r($q->result('array'));die();
 
 					$data['messages'] = $q->result('array');
-
+					$data['friend_count'] = $this->friendlib->get_friend_count($user_data['id']);
 					
-						$this->load->library('friendlib');
+					
+					// is Friend
 					if ($this->friendlib->check_friend($userdata['user_id'],$user_data['id']) == 2){
 						$this->load->view('user_view',$data);
 						
+					// Check Pendding
 					}else if ($this->friendlib->check_friend($userdata['user_id'],$user_data['id']) == 1) {
-						echo "pendding request";
+						
+						//Check user request
+						if ($this->friendlib->who_added($userdata['user_id'],$user_data['id']) == $userdata['user_id']) {
+							echo 'pendding request';
+						}else {
+							echo 'Comfirm Here';
+						}
+						
+						// not Friend
 					}else {
 						$this->load->view('user_not_friend',$data);
 						//echo "not friend";

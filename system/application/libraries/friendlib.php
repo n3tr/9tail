@@ -6,7 +6,7 @@ class Friendlib {
 	// return 1 if pendding
 	// return 2 if freind.
 	// 
-	
+
     function check_friend($from_user,$to_user)
     {
 	
@@ -39,9 +39,20 @@ class Friendlib {
 		}
     }
 
-	function request($from_id,$to_id,$guid)
+	function who_added($user1,$user2)
 	{
 		$CI =& get_instance();
+		$q = $CI->db->get_where('friend', array('from' => $user1,'to' => $user2), 1);
+		if ($q->num_rows > 0) {
+			return $user1;
+		}else{
+			return $user2;
+		}
+	}
+
+	function request($from_id,$to_id,$guid)
+	{
+			$CI =& get_instance();
 		$friend = array(
 			'to' => $to_id,
 			'from' => $from_id,
@@ -57,6 +68,23 @@ class Friendlib {
 		$emaillib = new Emaillib();
 		$emaillib->friend_request($from_id,$to_id,$guid);
 		
+	}
+	
+	// Return Friend Count of User
+	function get_friend_count($user_id)
+	{
+			$CI =& get_instance();
+				$CI->db->where(array(
+					'from' =>  $user_id,
+					'status'=> 1
+					));
+				$CI->db->or_where(array(
+					'to' => $user_id,
+					'status'=> 1
+					));
+
+				$q = $CI->db->get('friend');
+		return $CI->db->count_all_results();
 	}
 	
 

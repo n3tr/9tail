@@ -9,8 +9,19 @@ class Friend extends Controller {
 		parent::Controller();
 	}
 	
+	function index()
+	{
+		$userdata = $this->session->userdata('userdata');
+		
+		$this->db->where('to', $userdata['user_id']);
+		$this->db->join('user', 'user.id = friend.from');
+		$q = $this->db->get('friend');
+		$data['owner_data'] = $this->db->get_where('user', array('id'=>$userdata['user_id']),1);
+		$data['friend_list'] = $q->result('array');
+		$this->load->view('friend_list_view', $data);
+	}
 	
-	function request($to_user) {
+	function request_friend($to_user) {
 		$userdata = $this->session->userdata('userdata');
 		$user_id = $userdata['user_id'];
 		
@@ -26,7 +37,7 @@ class Friend extends Controller {
 	
 	}
 	
-	function confirm($guid=null)
+	function confirm($guid=null,$from_user=null)
 	{
 		if(isset($guid)){
 			
@@ -45,14 +56,59 @@ class Friend extends Controller {
 				//echo 'confirm';
 				$this->db->where('guid',$guid);
 				$this->db->update('friend',array('status'=>1)); 
-				echo 'updated';
+				
+				if(isset($from_user)){
+					
+					redirect('/user/'.$from_user);
+					
+				}else {
+					redirect('/friend/request_list');
+				}
+				
 			}else {
-				echo 'login';
+				redirect('/login');
 			}
 			
 		
 			//echo $user;
 		}
+	}
+	function request_list()
+	{
+		$userdata =$this->session->userdata('userdata');
+		
+		if ($userdata['logged_in']) {
+			
+			
+			$this->db->select('*');
+			//$this->db->from('friend')->where(array('to' => $userdata['user_id'],'status'=>0 ));
+			$this->db->where('to',$userdata['user_id']);
+			$this->db->join('user', 'user.id = friend.from');
+			
+			$q = $this->db->get('friend');
+		
+			//$q = $this->db->get_where('friend', array('to'=>$userdata['user_id'],'status'=>0));
+		
+			if ($q->num_rows() > 0) {
+				
+				$data['request_list'] = $q->result('array');
+				
+				$this->db->where('id', $userdata['user_id']);
+				$q = $this->db->get('user');
+				
+				$data['owner_data'] = $q->first_row('array');
+				$this->load->view('request_list_view', $data);
+				
+			}else{
+				$this->db->where('id', $userdata['user_id']);
+				$q = $this->db->get('user');
+				$owner_user = $q->first_row('array');
+				$data['owner_data'] = $owner_user;
+				$this->load->view('request_list_view', $data);
+			}
+		}
+		
+		
 	}
 
 }
