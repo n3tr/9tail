@@ -88,6 +88,18 @@ class Friendlib {
 	}
 	
 
+	function get_friend_list($user_id)
+	{
+		$CI =& get_instance();
+				$sql1 = "SELECT friend.to as user_id,user.screen_name,user.firstname,user.lastname FROM
+		friend JOIN user ON user.id = friend.to WHERE friend.from = ". $user_id . " AND friend.status = 1";
+				$sql2 = " UNION SELECT friend.from as user_id,user.screen_name,firstname,user.lastname  FROM
+				friend JOIN user ON user.id = friend.from WHERE friend.to =" . $user_id." AND friend.status = 1";
+				$sql = $sql1 . $sql2;
+				$q = $CI->db->query($sql);
+			
+				return $q->result('array');
+	}
 }
 
 ?>

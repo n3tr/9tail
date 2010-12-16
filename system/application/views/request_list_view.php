@@ -5,9 +5,10 @@
 	<title></title>
 </head>
 <body>
+
 	<?php
 	if (isset($request_list)) {
-		print_r($request_list);
+		
 		?>
 			<ul>
 					<?php
@@ -24,5 +25,6 @@
 		echo "no have any request now";
 	}
 	?>
+	
 </body>
 </html>

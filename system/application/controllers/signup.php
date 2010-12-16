@@ -44,7 +44,7 @@ class Signup extends Controller {
 				$this->load->library('encrypt');
 				$password = $this->encrypt->encode($this->input->post('password'), 'userpassword');
 				$data = array(
-					'screen_name' => $this->input->post('screen_name'), 
+					'screen_name' => strtolower($this->input->post('screen_name')), 
 					'email' => $this->input->post('email'),
 					'password' => $password,
 					'firstname' => $this->input->post('firstname'),

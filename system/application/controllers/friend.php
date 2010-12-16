@@ -13,12 +13,39 @@ class Friend extends Controller {
 	{
 		$userdata = $this->session->userdata('userdata');
 		
-		$this->db->where('to', $userdata['user_id']);
-		$this->db->join('user', 'user.id = friend.from');
-		$q = $this->db->get('friend');
-		$data['owner_data'] = $this->db->get_where('user', array('id'=>$userdata['user_id']),1);
-		$data['friend_list'] = $q->result('array');
-		$this->load->view('friend_list_view', $data);
+		//
+		// This Query will return only who added Fix it !!
+		//
+		if($userdata['logged_in']){
+			$data['owner_data'] = $this->db->get_where('user', array('id'=>$userdata['user_id']),1);
+			$data['friend_list'] = $this->friendlib->get_friend_list($userdata['user_id']);
+			$this->load->view('friend_list_view', $data);
+		}else{
+			redirect('/login/','Refresh');
+		}
+		
+		
+	}
+	
+	function user($user_screen_name=null)
+	{
+		$userdata = $this->session->userdata('userdata');
+		if($userdata['logged_in']){
+			if($this->uri->segment(3) == FALSE){
+				redirect('/friend/','Refresh');
+			}else{
+				$this->db->select('id');
+				$this->db->where('screen_name', $user_screen_name);
+				$q = $this->db->get('user',1);
+				$user_id = $q->first_row()->id;
+				
+				$data['owner_data'] = $this->db->get_where('user', array('id'=>$userdata['user_id']),1);
+				$data['friend_list'] = $this->friendlib->get_friend_list($user_id);
+				$this->load->view('friend_list_view', $data);
+			}
+		}else {
+			redirect('/login','Refresh');
+		}
 	}
 	
 	function request_friend($to_user) {
