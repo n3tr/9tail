@@ -5,6 +5,15 @@
 	<title></title>
 </head>
 <body>
+	<div id="global-nav">
+		<ul>
+			<li><a href="<?php echo base_url();?>">9Tail</a></li>
+			<li><a href="<?php echo site_url("/"); ?>">Home</a></li>
+			<li><a href="<?php echo site_url("/friend/"); ?>">Friend</a></li>
+			<li><a href="<?php echo site_url("/location/"); ?>">Place</a></li>
+			<li><?php echo anchor('session/destroy','Logout');?></li>
+		</ul>
+	</div>
 	<?php
 	
 	if (isset($friend_list)) {

@@ -13,8 +13,13 @@ class User extends Controller {
 	function index()
 	{
 		$userdata = $this->session->userdata('userdata');
+		if ($userdata['logged_in']) {
+			redirect('/user/'. $userdata['screen_name']);
+		}else{
+			redirect('/login/','Refresh');
+		}
 		//$this->profile($userdata['screen_name']);
-		redirect('/user/'. $userdata['screen_name']);
+		
 	}
 	
 	function profile($user)
@@ -50,7 +55,7 @@ class User extends Controller {
 		
 			$data['messages'] = $q->result('array');
 			$data['friend_count'] = $this->friendlib->get_friend_count($userdata['user_id']);
-			$this->load->view('owner_user_view',$data);
+			$this->load->view('profile/owner_user_view',$data);
 			
 		}else if($this->uri->segment(2) == TRUE){
 		
@@ -93,7 +98,9 @@ class User extends Controller {
 					
 					// is Friend
 					if ($this->friendlib->check_friend($userdata['user_id'],$user_data['id']) == 2){
-						$this->load->view('user_view',$data);
+						
+						$this->load->view('profile/user_view',$data);
+						
 						
 					// Check Pendding
 					}else if ($this->friendlib->check_friend($userdata['user_id'],$user_data['id']) == 1) {
@@ -107,7 +114,7 @@ class User extends Controller {
 						
 						// not Friend
 					}else {
-						$this->load->view('user_not_friend',$data);
+						$this->load->view('profile/user_not_friend',$data);
 						//echo "not friend";
 					}
 					

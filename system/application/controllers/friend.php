@@ -111,6 +111,7 @@ class Friend extends Controller {
 			//$this->db->from('friend')->where(array('to' => $userdata['user_id'],'status'=>0 ));
 			$this->db->where('to',$userdata['user_id']);
 			$this->db->join('user', 'user.id = friend.from');
+			$this->db->order_by('datetime','desc');
 			
 			$q = $this->db->get('friend');
 		

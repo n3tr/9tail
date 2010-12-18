@@ -73,7 +73,9 @@ class Friendlib {
 	// Return Friend Count of User
 	function get_friend_count($user_id)
 	{
+		
 			$CI =& get_instance();
+			/*
 				$CI->db->where(array(
 					'from' =>  $user_id,
 					'status'=> 1
@@ -82,9 +84,11 @@ class Friendlib {
 					'to' => $user_id,
 					'status'=> 1
 					));
-
-				$q = $CI->db->get('friend');
-		return $CI->db->count_all_results();
+			*/
+			$sql = "SELECT * FROM friend WHERE ( friend.to = ".$user_id." OR friend.from = ".$user_id." )";
+			
+				$q = $CI->db->query($sql);
+		return $q->num_rows();
 	}
 	
 

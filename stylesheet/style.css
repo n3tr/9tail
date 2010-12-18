@@ -1,0 +1,70 @@
+#global-nav-wrapper{
+	background:#c4c4c4;
+	position:relative;
+	min-height:30px;
+}
+
+ul#global-nav{
+	position: relative;
+}
+
+ul#global-nav li{
+	float: left;
+	padding: 7px 10px 5px;
+}
+
+ul#global-nav li a{
+	text-decoration:none;
+}
+
+
+#profile_info_wraper{
+	min-height:200px;
+}
+
+#message_post_box{
+height:40px;
+width:410px;
+line-height:20px;
+padding:5px;
+
+}
+
+.user_avatar img{
+	width:64px;
+	height:64px;
+}
+
+.message{
+	display: block;
+padding:10px 0;
+	border-bottom: 1px solid #CACACA;
+}
+
+.message_text{
+	position:relative;
+	font-size:14px;
+	line-height:16px;
+
+}
+
+.message_text > p{
+	display: block;
+	font-size:14px;
+	line-height:16px;
+	margin-bottom: 2px;
+}
+
+.message_text > i{
+	color:#AAAAAA;
+		font-size:12px;
+}
+
+.message_text > a{
+	display: block;
+	text-decoration:none;
+	margin-bottom:2px;
+	font-weight: bold;
+	font-size:15px;
+	
+}

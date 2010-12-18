@@ -1,0 +1,481 @@
+/* v1.0 | 20080212 */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0 none;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+body {
+	line-height: 1;
+		font-family: Arial, "MS Trebuchet", sans-serif;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+/* remember to define focus styles! */
+:focus {
+	outline: 0;
+}
+
+/* remember to highlight inserts somehow! */
+ins {
+	text-decoration: none;
+}
+del {
+	text-decoration: line-through;
+}
+
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.clear{
+	clear:both;
+}
+
+
+/*
+My CSS goes here
+*/
+
+.container{
+	width:940px;
+	margin:0 auto;
+	padding:0 10px; 
+}
+
+#global_nav_wrap{
+	height:40px;
+	position:relative;
+	background:#212121;
+	color:#dedede;
+
+}
+
+#global_nav_wrap a{
+	color:#dedede;
+	text-decoration:none;
+}
+
+h1#logo{
+	float:left;
+	height:35px;
+	font-size:20px;
+}
+
+ul#main_nav{
+	float:right;
+	position:relative;
+}
+
+ul#main_nav li{
+	float:left;
+	padding:13px 10px 2px;
+}
+
+
+#main_wrap{
+	min-height:400px;
+	background:#333;
+	padding-top:50px;
+}
+
+#userinfo_wrap{
+	background:#eee;
+	min-height:100px;
+	position: relative;
+	
+}
+
+#usernav_wrap{
+	margin-bottom:15px;
+}
+
+#user_nav{
+	float:right;
+}
+
+ul#user_nav li{
+	float:left;
+	
+}
+
+ul#user_nav li a{
+	color:#dedede;
+	padding:5px 10px;
+	text-decoration:none;
+}
+
+
+
+#userinfo{
+	margin-left: 220px;
+	padding-top:25px;
+	color:#464646;
+}
+
+
+
+
+.user_screen_name{
+	font-size:32px;
+	margin-bottom:5px;
+}
+
+.user_full_name{
+	font-size:14px;
+	color:#4c4c4c;
+}
+
+#useravatar_box{
+	padding:10px;
+	position: absolute;
+	background:#fff;
+	top:-40px;
+}
+
+#content{
+	background:#fff url('./images/content_bg.png') repeat-y;
+	min-height:200px;
+}
+
+#page{
+	float:left;
+	min-height:300px;
+	width:590px;
+
+	position:relative;
+}
+
+#page_inner{
+	padding-top:50px;
+}
+
+#message_post_box{
+	padding-left:10px;
+	padding-right:10px;
+	margin-bottom:10px;
+}
+
+#message_post_box textarea{
+	padding:8px;
+	border:1px solid #ccc;
+	width:386px;
+	color: #222222;
+	font: 14px/18px "Helvetica Neue",Arial,sans-serif;
+	height: 36px;
+	outline: medium none;
+	overflow-x: hidden;
+ 	overflow-y: auto;
+	padding: 8px;
+	white-space: pre-wrap;
+	 -moz-border-radius: 4px 4px 4px 4px;
+	float:left;
+}
+
+.submit_message_bth{
+	width:90px;
+	float:left;
+	background:#00adef;
+	height:26px;
+	border:1px solid #00adef;
+	color:#fcf7f7;
+	-moz-border-radius: 4px 4px 4px 4px;
+	font-size:13px;
+	font-weight: bold;
+	float:left;
+	margin-left:20px;
+	margin-top:15px;
+}
+
+.submit_message_bth:hover{
+	background:#00a0e0;
+		border:1px solid #00adef;
+	cursor: pointer;
+
+}
+#messages{
+	padding-right:10px;
+}
+
+.message {
+    border-bottom: 1px solid #CACACA;
+    display: block;
+    padding: 10px 0;
+}
+
+.message_text{
+	margin-left:80px;
+}
+.message_text a.user_link {
+    display: block;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 2px;
+    text-decoration: none;
+}
+
+.message_text p {
+    display: block;
+    font-size: 14px;
+    line-height: 16px;
+    margin-bottom: 2px;
+}
+
+.message_text i {
+    color: #AAAAAA;
+    font-size: 12px;
+}
+
+.user_avatar{
+	float:left;
+	
+}
+
+.user_avatar img {
+    height: 64px;
+    width: 64px;
+}
+
+#sidebar{
+	width:350px;
+	float:right;
+		min-height:300px;
+}
+
+.widget_box{
+	padding:10px 0 10px 10px;
+	margin-bottom:15px;
+}
+
+h3.widget_title{
+ 	border-bottom: 2px solid #666;
+    color: #4a4a4a;
+    font-size:18px;
+    font-weight: bold;
+    letter-spacing: -0.04em;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+}
+
+.location_widget{
+	background:#ececec;
+	height:30px;
+	-moz-border-radius: 4px 4px 4px 4px;
+	margin-top:20px;
+	margin-left:10px;
+}
+
+.location_widget ul li a{
+	width:90px;
+	float:left;
+	padding:7px 0;
+	background:#00adef;
+	text-align: center;
+	border:1px solid #00adef;
+	color:#fcf7f7;
+	-moz-border-radius: 4px 4px 4px 4px;
+	font-size:13px;
+	font-weight: bold;
+	float:left;
+	margin-left:10px;
+	text-decoration:none;
+}
+
+.location_widget ul li a:hover{
+	background:#00a0e0;
+		border:1px solid #00adef;
+	cursor: pointer;	
+	
+}
+
+
+
+
+/* for login page */
+#header_text_wrap{
+	min-height:100px;
+	background:#ececec;
+	-moz-border-radius: 5px 5px 0 0 ;
+	border-bottom:1px solid #DDD;
+}
+
+#header_text{
+	margin-left:40px;
+	padding-top:35px;
+}
+
+#header_text h2{
+	font-size:30px;
+	color:#4c4c4c;
+}
+
+#page_wrap{
+	background:#fff;
+	
+	-moz-border-radius: 0 0 5px 5px;
+	padding-top:50px;
+}
+
+#login_box{
+margin-left:200px;
+width:220px;
+border-right:1px solid #CECECE;
+padding-right:50px;
+	float:left;
+}
+
+#login_box label{
+	margin-bottom:10px;
+	display:block;
+	font-weight: bold;
+	color:#444444;
+}
+
+#login_box input[type='text'] ,#login_box input[type='password']{
+	display:block;
+	margin-bottom:10px;
+	width:200px;
+	border:1px solid #ccc;
+	color: #222222;
+	font: 14px/18px "Helvetica Neue",Arial,sans-serif;
+	height: 18px;
+	outline: medium none;
+	overflow-x: hidden;
+ 	overflow-y: auto;
+	padding: 8px;
+	white-space: pre-wrap;
+	 -moz-border-radius: 4px 4px 4px 4px;
+}
+
+#login_box input[type='submit']{
+	width:90px;
+	float:right;
+	background:#00adef;
+	height:26px;
+	border:1px solid #00adef;
+	color:#fcf7f7;
+	-moz-border-radius: 4px 4px 4px 4px;
+	font-size:13px;
+	font-weight: bold;
+
+	margin-top:15px;
+
+}
+
+#login_box input[type='submit']:hover{
+	background:#00a0e0;
+	border:1px solid #00adef;
+	cursor: pointer;
+}
+
+.login_option{
+	float:right;
+	margin-top:20px;
+	font-size:13px;
+
+}
+
+.login_option a{
+	text-decoration:none;
+	color:#00adef;
+}
+
+.login_option a:hover{
+	text-decoration:underline;
+	color:#00adef;
+}
+
+#login_signin_box{
+	margin-left:50px;
+	float:left;
+	color:#444444;
+}
+
+#login_signin_box h3{
+	font-size:20px;
+	margin-bottom:15px;
+}
+
+#login_signin_box a{
+	text-decoration:none;
+	color:#00adef;
+}
+
+
+/* for signup view*/
+
+#signup_box{
+margin-left:75px;
+width:220px;
+border-right:1px solid #CECECE;
+padding-right:50px;
+	float:left;
+}
+
+#signup_box label{
+	margin-bottom:10px;
+	display:block;
+	font-weight: bold;
+	color:#444444;
+}
+
+#signup_box input[type='text'] ,#signup_box input[type='password']{
+	display:block;
+	margin-bottom:10px;
+	width:200px;
+	border:1px solid #ccc;
+	color: #222222;
+	font: 14px/18px "Helvetica Neue",Arial,sans-serif;
+	height: 18px;
+	outline: medium none;
+	overflow-x: hidden;
+ 	overflow-y: auto;
+	padding: 8px;
+	white-space: pre-wrap;
+	 -moz-border-radius: 4px 4px 4px 4px;
+}
+
+#signup_box input[type='submit']{
+	width:90px;
+	float:right;
+	background:#00adef;
+	height:26px;
+	border:1px solid #00adef;
+	color:#fcf7f7;
+	-moz-border-radius: 4px 4px 4px 4px;
+	font-size:13px;
+	font-weight: bold;
+
+	margin-top:15px;
+
+}
+
+#signup_box input[type='submit']:hover{
+	background:#00a0e0;
+	border:1px solid #00adef;
+	cursor: pointer;
+}

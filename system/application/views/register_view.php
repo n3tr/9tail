@@ -16,7 +16,11 @@
 	<body id="register-page">
 		
 		<div id='register-form'>
-				<?php echo validation_errors(); ?>
+			<?php if(!validation_errors() == '') :?>
+					<div id="form_error">
+						<?php echo validation_errors(); ?>
+					</div>
+			<?php endif; ?>
 			<?php 
 				echo form_open('user/register_submit');
 				

@@ -3,6 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 	<title></title>
+	<?php echo link_tag('template_files/style.css');?>
 	<script type="text/javascript"
 	    src="http://maps.google.com/maps/api/js?sensor=false">
 	</script>
@@ -15,7 +16,7 @@
 			function initialize() {
 					
 				var mapOption = {
-				  zoom: 16,
+				  zoom: 15,
 				  center: center,
 				  mapTypeId: google.maps.MapTypeId.TERRAIN
 				};
@@ -53,36 +54,76 @@
 		</script>
 </head>
 <body onload="initialize()">
-	<div id="map_view" style="width: 400px; height: 300px; position: relative; background-color: rgb(229, 227, 223); overflow: hidden; z-index: 0;">
+	
+	<?php include APPPATH.'/views/nav/global_nav_view.php';?> 
 		
-	</div>
-	<div id="location_form">
-		<?php
-		echo form_open('location_created','',array('location_lat'=>$location_data['lat'],'location_lng'=>$location_data['lng']));
-		echo form_label('Location Name', 'location_name');
-		echo form_input('location_name', '');
+		<div id="main_wrap">
+			<div id="header_text_wrap" class="container">
+				<div id="header_text">
+					<h2>Edit Location Info:</h2>
+				</div>
+
+			</div>
+			
+			<div id="page_wrap" class="container">
+				<div class='page_header'>
+						<h2>Location Info</h2>
+				</div>
+				<div class='page_box_wrap'>
+					<div class='page_map_box'>
+						<div id="map_view" style="width: 400px; height: 300px; position: relative; background-color: rgb(229, 227, 223); overflow: hidden; z-index: 0;"></div>
+						<div>
+							<ul>
+								<li>You can Drag pin to location you want.</li>
+								<li>Remainder if you drag pin location position will change.</li>
+							
+							</ul>
+						</div>
+					</div> <!--- /page_map_box-->
+						<div class='location_info_box'>
+							<div id="form_error">
+								<?php echo validation_errors(); ?>
+							</div>
+							<?php
+							echo form_open('location/location_created',array('class'=>'location_info_form'));
+							echo form_hidden('location_lat', $location_data['lat']);
+							echo form_hidden('location_lng', $location_data['lng']);
+							echo form_label('Location Name', 'location_name');
+							echo form_input('location_name', '');
+
+							echo form_label('Description','location_description');
+							echo form_textarea('location_description',isset($location_data['description']) ? $location_data['description'] : '');
+
+							echo form_label('Address:','location_address');
+							echo form_input('location_address',isset($location_data['route']) ? $location_data['route'] : '');
+						
+							echo form_label('Tamboon:','location_tamboon');
+							echo form_input('location_tambon',isset($location_data['locality']) ? $location_data['locality'] : '');
+
+							echo form_label('Amphoe','location_amphoe');
+							echo form_input('location_amphoe',isset($location_data['amphoe']) ? $location_data['amphoe'] : '');
+
+							echo form_label('Province','location_province');
+							echo form_input('location_province', isset($location_data['province']) ? $location_data['province'] : '');
+
+							echo form_label('Country','location_country');
+							echo form_input('location_country',isset($location_data['country'])? $location_data['country'] : '');
+
+							echo form_label('Postal Code','location_postal_code');
+							echo form_input('location_postal_code',isset($location_data['postal_code']) ? $location_data['postal_code'] : '');
+
+							echo form_submit('location_submit', 'Create');
+							echo form_close();
+							?>
+						</div><!-- /location info form-->
+				
+					<div class='clear'></div>
+				</div><!-- end page_box_wrap-->
+				</div>
+
+			
+	
 		
-		echo form_label('Address:','location_address');
-		echo form_input('location_address',$location_data['route']);
-		
-		echo form_label('Tamboon:','location_tamboon');
-		echo form_input('location_tambon',$location_data['locality']);
-		
-		echo form_label('Amphoe','location_amphoe');
-		echo form_input('amphoe',$location_data['amphoe']);
-		
-		echo form_label('Province','location_province');
-		echo form_input('location_province', $location_data['province']);
-		
-		echo form_label('Country','location_country');
-		echo form_input('location_country',$location_data['country']);
-		
-		echo form_label('Postal Code','location_postal_code');
-		echo form_input('location_postal_code',$location_data['postal_code']);
-		
-		echo form_submit('location_submit', 'Create');
-		echo form_close();
-		?>
-	</div>
-</body>
+		</div> <!--end main wrap -->
 </html>
+		

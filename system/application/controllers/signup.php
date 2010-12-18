@@ -11,13 +11,22 @@ class Signup extends Controller {
 	}
 	
 	function index() {
-		$this->load->view('signup_view');
+		$userdata = $this->session->userdata('userdata');
+		if(!$userdata['logged_in']){
+			$this->load->view('signup_view');
+		}else{
+			redirect('/','Refresh');
+		}
 	}
 	
 	function submit()
 	{
 		//register submit to here
 		
+		$userdata = $this->session->userdata('userdata');
+		if($userdata['logged_in']){
+			redirect('/','Refresh');
+		}
 		
 		$this->form_validation->set_rules('email','Email','required|trim|valid_email|max_length[50]');
 		$this->form_validation->set_rules('password','password','required|trim|max_length[50]|min_length[6]');
@@ -35,8 +44,6 @@ class Signup extends Controller {
 			$q = $this->db->get('user');
 			
 			if($q->num_rows() > 0){
-			
-
 				$this->load->view('signup_view');
 								
 			}else {
@@ -74,18 +81,17 @@ class Signup extends Controller {
 				. "\r\n"
 				. '9Tail Site'
 				);
-				
+					
 					if($this->email->send())
 					{
-						echo 'Your email was sent, fool.';
-						$this->load->view('success_register');
+						
 					}
 
 					else
 					{
-						show_error($this->email->print_debugger());
+					
 					}
-				
+				$this->load->view('success_register',$data);
 				
 				
 			}
