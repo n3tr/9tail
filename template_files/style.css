@@ -57,6 +57,9 @@ table {
 	clear:both;
 }
 
+.center{
+	text-align:center;
+}
 
 /*
 My CSS goes here
@@ -581,3 +584,119 @@ display: block;
 	text-align:center;
 	margin-bottom:10px;
 }
+
+
+/*
+Checkin View
+*/
+
+.checkin_list_box{
+	float:left;
+	margin-right:40px;
+	border-right:1px solid #CCC;
+	width:440px;
+}
+
+.checkin_search_box{
+	float:left;
+	width:440px;
+
+}
+#search_location_text{
+	margin-bottom:10px;
+	width:200px;
+	border:1px solid #ccc;
+	color: #222222;
+	font: 14px/18px "Helvetica Neue",Arial,sans-serif;
+	height: 18px;
+	outline: medium none;
+	overflow-x: hidden;
+ 	overflow-y: auto;
+	padding: 8px;
+	white-space: pre-wrap;
+	 -moz-border-radius: 4px 4px 4px 4px;
+}
+
+#search_location_submit{
+	width:90px;
+	background:#00adef;
+	height:35px;
+	border:1px solid #00adef;
+	color:#fcf7f7;
+	-moz-border-radius: 4px 4px 4px 4px;
+	-webkit-border-radius: 4px;
+	font-size:13px;
+	font-weight: bold;
+	text-transform: uppercase;
+	margin-top:15px;
+	
+}
+
+.checkin_result{
+	border-bottom:1px solid #CECECE;
+	padding:10px 5px;
+	text-align:left;
+}
+
+.checkin_result:hover{
+	background:#ECECEC;
+	}
+	
+.checkin_result_name{
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+
+.checkin_result_desc{
+	margin-bottom:7px;
+}
+
+.checkin_result_desc p{
+	font-size:13px;
+	color:#333;
+}
+
+.checkin_result_count p{
+	font-size:13px;
+	color:#464646;
+}
+
+.checkin_mini_map{
+	margin-right:10px;
+	width:175px;
+	height:115px;
+	float:left;
+}
+
+
+.overlay{
+ background:#000;
+	   position:fixed;
+	   top:0px;
+	   bottom:0px;
+	   left:0px;
+	   right:0px;
+	   z-index:100;
+	opacity:0.8;
+}
+
+.box{
+		display:none;
+	    position:fixed;
+	    top:200px;
+	    left:30%;
+	    right:30%;
+	    background-color:#fff;
+	    color:#7F7F7F;
+	    padding:20px;
+	    border:2px solid #ccc;
+	    -moz-border-radius: 10px;
+	    -webkit-border-radius:10px;
+	    -khtml-border-radius:10px;
+	    -moz-box-shadow: 0 1px 5px #333;
+	    -webkit-box-shadow: 0 1px 5px #333;
+	    z-index:101;
+}
+
+

@@ -81,9 +81,12 @@
 						</div>
 					</div> <!--- /page_map_box-->
 						<div class='location_info_box'>
-							<div id="form_error">
-								<?php echo validation_errors(); ?>
-							</div>
+							
+							<?php if(!validation_errors() == '') :?>
+									<div id="form_error">
+										<?php echo validation_errors(); ?>
+									</div>
+							<?php endif; ?>
 							<?php
 							echo form_open('location/location_created',array('class'=>'location_info_form'));
 							echo form_hidden('location_lat', $location_data['lat']);

@@ -15,7 +15,7 @@
 		<div id="main_wrap">
 			<div id="header_text_wrap" class="container">
 				<div id="header_text">
-					<h2>Sign up Form</h2>
+					<h2>Location Created:</h2>
 				</div>
 
 			</div>

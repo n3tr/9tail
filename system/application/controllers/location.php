@@ -30,6 +30,11 @@ class Location extends Controller {
 		}
 	}
 	
+	function place($place_id)
+	{
+		$this->load->view('location/place_view');
+	}
+	
 	function searchbyuser()
 	{
 		$lat = $this->input->post('lat_field', TRUE);
@@ -95,7 +100,7 @@ class Location extends Controller {
 				$location_data['lng'] = $map_results[0]->geometry->location->lng;
 				$data['location_data'] = $location_data;
 			
-				$data['owner_data'] =  $userdata;
+				$data['owner_data'] =  $this->session->userdata('userdata');;
 				$this->load->view('location/create_info_view', $data);
 				
 				 						
@@ -195,7 +200,7 @@ class Location extends Controller {
 		$this->form_validation->set_rules('location_lng','','required');
 	
 		if($this->form_validation->run()){
-			$userdata = $this->session->userdata('userdata');
+		
 			
 			$name = $this->input->post('location_name', TRUE);
 			$description = $this->input->post('location_description', TRUE);
@@ -233,8 +238,10 @@ class Location extends Controller {
 				'country'=> $this->input->post('location_country', TRUE),
 				'postal'=>$this->input->post('location_postal_code', TRUE)
 				);
+				
 				$this->db->insert('place_address', $place_address);
-			$this->load->view('location/location_creaetd_success_view');
+				$data['owner_data'] =  $userdata;
+			$this->load->view('location/location_creaetd_success_view',$data);
 			
 		}else{
 			$location_data['route'] = $this->input->post('location_address', TRUE);
@@ -247,6 +254,7 @@ class Location extends Controller {
 			$location_data['name'] = $this->input->post('location_name', TRUE);
 			$location_data['description'] = $this->input->post('location_description', TRUE);
 			$location_data['postal_code'] = $this->input->post('location_postal_code', TRUE);
+		
 			$data['owner_data'] =  $userdata;
 			$data['location_data'] = $location_data;
 			$this->load->view('location/create_info_view',$data);

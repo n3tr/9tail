@@ -49,7 +49,7 @@
 			
 			<div id="page_wrap" class="container">
 				<div class='page_header'>
-						<h2>you have 3 Options to Create New Place</h2>
+						<h2>You have 3 Options to Create New Place</h2>
 				</div>
 				<div class='page_box_wrap'>
 				<div class='page_box_3'>

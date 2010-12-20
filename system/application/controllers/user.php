@@ -8,6 +8,7 @@ class User extends Controller {
 	function __construct() {
 		parent::Controller();
 		$this->load->library('friendlib');
+		$this->load->library('locationlib');
 	}
 	
 	function index()
@@ -55,6 +56,7 @@ class User extends Controller {
 		
 			$data['messages'] = $q->result('array');
 			$data['friend_count'] = $this->friendlib->get_friend_count($userdata['user_id']);
+			$data['last_checkin'] = $this->locationlib->get_last_checkin_of_user($userdata['user_id']);
 			$this->load->view('profile/owner_user_view',$data);
 			
 		}else if($this->uri->segment(2) == TRUE){
@@ -94,10 +96,11 @@ class User extends Controller {
 
 					$data['messages'] = $q->result('array');
 					$data['friend_count'] = $this->friendlib->get_friend_count($user_data['id']);
-					
-					
+					$data['last_checkin'] = $this->locationlib->get_last_checkin_of_user($user_data['id']);
+				
 					// is Friend
 					if ($this->friendlib->check_friend($userdata['user_id'],$user_data['id']) == 2){
+						
 						
 						$this->load->view('profile/user_view',$data);
 						
@@ -117,10 +120,6 @@ class User extends Controller {
 						$this->load->view('profile/user_not_friend',$data);
 						//echo "not friend";
 					}
-					
-					
-					
-		
 					
 				}else{
 					

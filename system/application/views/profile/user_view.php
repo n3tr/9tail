@@ -94,7 +94,20 @@
 
 					<div class="widget_box">
 						<h3 class="widget_title">Widget Title</h3>
-						<img src="./images/map_preview.png"/>
+							<?php 
+							$image = '<img src="http://maps.google.com/maps/api/staticmap?center=' . 
+							$last_checkin['lat'] .
+							 ',' . 
+							$last_checkin['lng'] .
+							'&zoom=15&size=340x160&
+							markers=color:blue|label:P|'.
+							$last_checkin['lat'] .
+							 ',' . 
+							$last_checkin['lng'] .
+							'&maptype=terrain&sensor=false" />';
+							echo anchor('location/place/'. $last_checkin['place_id'],$image);
+
+							?>
 					</div>
 					<div class="widget_box">
 						<h3 class="widget_title">Widget Title</h3>

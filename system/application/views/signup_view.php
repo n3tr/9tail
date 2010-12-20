@@ -21,9 +21,12 @@
 			</div>
 			<div id="page_wrap" class="container">
 				<div id="signup_box">
-					<div id="form_error">
-						<?php echo validation_errors('<div id="error">','</div>'); ?>
-					</div>
+					
+					<?php if(!validation_errors() == '') :?>
+							<div id="form_error">
+								<?php echo validation_errors(); ?>
+							</div>
+					<?php endif; ?>
 								<?php 
 									echo form_open('signup/submit');
 
