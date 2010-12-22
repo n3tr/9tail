@@ -107,10 +107,12 @@ class Friend extends Controller {
 		if ($userdata['logged_in']) {
 			
 			
-			$this->db->select('*');
+			$this->db->select('*,friend.guid AS friend_guid');
 			//$this->db->from('friend')->where(array('to' => $userdata['user_id'],'status'=>0 ));
-			$this->db->where('to',$userdata['user_id']);
+				$this->db->where('to',$userdata['user_id']);
+				$this->db->where('friend.status','0');
 			$this->db->join('user', 'user.id = friend.from');
+		
 			$this->db->order_by('datetime','desc');
 			
 			$q = $this->db->get('friend');

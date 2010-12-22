@@ -23,7 +23,7 @@
 				foreach ($request_list as $row) {
 					echo '<li>';
 					echo anchor('/user/'.$row['screen_name'],$row['screen_name']); 
-					echo anchor('/friend/confirm/' . $row['guid']. '/' . $row['screen_name'], 'Accept Friend');	
+					echo anchor('/friend/confirm/' . $row['friend_guid']. '/', 'Accept Friend');	
 				}
 			?>
 		

@@ -29,7 +29,8 @@ class Signup extends Controller {
 		}
 		
 		$this->form_validation->set_rules('email','Email','required|trim|valid_email|max_length[50]');
-		$this->form_validation->set_rules('password','password','required|trim|max_length[50]|min_length[6]');
+		$this->form_validation->set_rules('password','Password','required|trim|max_length[50]|min_length[6]');
+		$this->form_validation->set_rules('conpassword','Confirm Password','required|trim|max_length[50]|min_length[6]|matches[password]');
 		$this->form_validation->set_rules('screen_name','Screen Name','required|trim|max_length[50]|min-length[4]');
 		$this->form_validation->set_rules('firstname','First Name','required|trim|max_length[250]');
 		$this->form_validation->set_rules('lastname','Last Name','required|trim|max_length[250]');
@@ -49,7 +50,17 @@ class Signup extends Controller {
 			}else {
 				
 				$this->load->library('encrypt');
-				$password = $this->encrypt->encode($this->input->post('password'), 'userpassword');
+				$password = $this->encrypt->sha1($this->input->post('password'));
+				
+				if($this->input->post('gender') != 0 && $this->input->post('gender') != 1){
+					$gender = 0;
+				}else {
+					$gender = $this->input->post('gender');
+				}
+				
+					$guid = strtolower($this->input->post('screen_name')) . $this->input->post('email');
+					$guid = $this->encrypt->sha1($guid);
+
 				$data = array(
 					'screen_name' => strtolower($this->input->post('screen_name')), 
 					'email' => $this->input->post('email'),
@@ -57,6 +68,8 @@ class Signup extends Controller {
 					'firstname' => $this->input->post('firstname'),
 					'lastname' => $this->input->post('lastname'),
 					'status' => 0,
+					'gender' => $gender,
+					'guid' => $guid,
 					'create_date' => date("Y-m-d H:i:s")
 				);
 
@@ -74,7 +87,7 @@ class Signup extends Controller {
 				. 'Click link below to Activate your Account'
 				. "\r\n"
 				. "\r\n"
-				. $this->config->item('base_url') . 'index.php/login/activate/' . $data['screen_name']
+				. $this->config->item('base_url') . 'index.php/login/activate/' . $data['guid']
 				. "\r\n"
 				. "\r\n"
 				. 'Thank you,'
@@ -84,14 +97,9 @@ class Signup extends Controller {
 					
 					if($this->email->send())
 					{
-						
+						$this->load->view('success_register',$data);
 					}
-
-					else
-					{
-					
-					}
-				$this->load->view('success_register',$data);
+				
 				
 				
 			}

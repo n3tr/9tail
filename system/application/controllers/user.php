@@ -62,6 +62,10 @@ class User extends Controller {
 		}else if($this->uri->segment(2) == TRUE){
 		
 			
+				$this->db->where('id', $userdata['user_id']);
+				$q = $this->db->get('user');
+				$owner_data =$q->first_row('array');
+				$data['owner_data'] =  $owner_data;
 				
 				$this->db->where('screen_name', $this->uri->segment(2));
 				$q = $this->db->get('user');
@@ -70,10 +74,7 @@ class User extends Controller {
 					
 					$user_data = $q->first_row('array');
 					$data['user_data'] = $user_data;
-					$this->db->where('screen_name', $userdata['screen_name']);
-					$q = $this->db->get('user');
-					$owner_data =$q->first_row('array');
-					$data['owner_data'] =  $owner_data;
+					
 
 
 
@@ -110,20 +111,24 @@ class User extends Controller {
 						
 						//Check user request
 						if ($this->friendlib->who_added($userdata['user_id'],$user_data['id']) == $userdata['user_id']) {
-							echo 'pendding request';
+							$data['friend_pedding'] = 1;
+							$this->load->view('profile/pedding_request',$data);
 						}else {
-							echo 'Comfirm Here';
+							$friend_guid = $this->friendlib->friend_guid($user_data['id'],$userdata['user_id']);
+						
+							$data['friend_guid'] = $friend_guid;
+							$this->load->view('profile/pedding_request',$data);
+							
 						}
 						
 						// not Friend
 					}else {
-						$this->load->view('profile/user_not_friend',$data);
-						//echo "not friend";
+						$this->load->view('profile/pedding_request',$data);
 					}
 					
 				}else{
 					
-					echo "user not found";
+					$this->load->view('profile/user_not_found',$data);
 				}
 			
 					

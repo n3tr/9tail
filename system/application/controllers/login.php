@@ -27,11 +27,11 @@ $userdata = $this->session->userdata('userdata');
 	// Call When User Click Activate Link Form Email
 	// Note : This Method Must be fix Later
 	// Now User Screen Name to Active User Account
-	function activate($screen_name = null)
+	function activate($guid = null)
 	{
-		if (isset($screen_name)) {
-			# code...
-		$this->db->where('screen_name', $screen_name);
+		if (isset($guid)) {
+			
+		$this->db->where('guid', $guid);
 		$q = $this->db->get('user',1);
 		
 		if($q->num_rows() > 0){

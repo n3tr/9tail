@@ -35,7 +35,10 @@
 
 									echo form_label('Password:', 'password');
 									echo form_password('password');
-
+									
+									echo form_label('Confirm Password:', 'conpassword');
+									echo form_password('conpassword');
+									
 									echo form_label('Screen Name', 'screen_name');
 									echo form_input('screen_name',set_value('screen_name'));
 
@@ -44,7 +47,9 @@
 
 									echo form_label('Last Name:', 'lastname');
 									echo form_input('lastname',set_value('lastname'));
-
+									
+									echo form_label('Gender:', 'gender');
+									echo form_dropdown('gender', array('0' => 'Mail','1' => 'Female'), '0');
 									echo form_submit('submit', 'Submit');
 									echo form_close();
 

@@ -91,19 +91,26 @@
 						</div>
 
 						<div class="widget_box">
-							<h3 class="widget_title">Widget Title</h3>
+							<h3 class="widget_title">You are here: <?php echo $last_checkin['name'] ?></h3>
 							<?php 
-							$image = '<img src="http://maps.google.com/maps/api/staticmap?center=' . 
-							$last_checkin['lat'] .
-							 ',' . 
-							$last_checkin['lng'] .
-							'&zoom=15&size=340x160&
-							markers=color:blue|label:P|'.
-							$last_checkin['lat'] .
-							 ',' . 
-							$last_checkin['lng'] .
-							'&maptype=terrain&sensor=false" />';
-							echo anchor('location/place/'. $last_checkin['place_id'],$image);
+							
+							if(!$last_checkin ==0){
+								$image = '<img src="http://maps.google.com/maps/api/staticmap?center=' . 
+								$last_checkin['lat'] .
+								 ',' . 
+								$last_checkin['lng'] .
+								'&zoom=15&size=340x160&
+								markers=color:blue|label:P|'.
+								$last_checkin['lat'] .
+								 ',' . 
+								$last_checkin['lng'] .
+								'&maptype=terrain&sensor=false" />';
+								echo anchor('location/place/'. $last_checkin['place_id'],$image);
+							}else{
+								echo '<p>You not check-in yet.</p>';
+								echo anchor('checkin', 'Click here to start Check-in',array('class'=>'blue_link'));
+							}
+						
 
 							?>
 						</div>

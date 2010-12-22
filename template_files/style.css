@@ -282,6 +282,11 @@ ul#user_nav li a{
 	margin-bottom:15px;
 }
 
+.widget_box p{
+	
+	margin-bottom:10px;
+}
+
 h3.widget_title{
  	border-bottom: 2px solid #666;
     color: #4a4a4a;
@@ -500,6 +505,12 @@ padding-right:50px;
 	cursor: pointer;
 }
 
+select{
+display: block;
+  padding: 1px;
+  width: 100px;
+}
+
 #page_message_box{
 	margin-left:50px;
 }
@@ -699,4 +710,22 @@ Checkin View
 	    z-index:101;
 }
 
+.blue_link{
+	-moz-border-radius: 4px 4px 4px 4px;
+    background: none repeat scroll 0 0 #00ADEF;
+    border: 1px solid #00ADEF;
+    color: #FCF7F7;
+    font-size: 13px;
+    font-weight: bold;
+    height: 26px;
+    margin-top: 15px;
+    width: 90px;
+	text-decoration:none;
+	padding:5px 7px;
+	margin-top:10px;
+}
 
+.blue_link:hover{
+background:#00a0e0;
+	
+}

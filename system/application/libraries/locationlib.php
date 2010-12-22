@@ -11,7 +11,12 @@ class Locationlib {
 		$CI =& get_instance();
 		$sql = 'SELECT * from 9tail_db.checkin JOIN 9tail_db.place ON place.id = checkin.place_id where checkin.user_id = ? order by checkin.datetime desc limit 1';
 		$q = $CI->db->query($sql,$user_id);
-		return $q->first_row('array');
+		if($q->num_rows() > 0){
+		return $q->first_row('array');	
+		}else {
+			return 0;
+		}
+		
 	}
   }
 

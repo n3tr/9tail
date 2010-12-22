@@ -29,7 +29,9 @@ class Session extends Controller {
 		else {
 				$email = $this->input->post('email');
 				$password = $this->input->post('password');
-				$password = $this->encrypt->decode($password);
+				$password = $this->encrypt->sha1($password);
+				
+	
 				$this->db->where('email', $email);
 				$this->db->where('password',$password);
 				$q = $this->db->get('user');
@@ -50,7 +52,7 @@ class Session extends Controller {
 				
 				}else {
 					// email or password not match
-			
+					
 					redirect('/login');
 				
 				}

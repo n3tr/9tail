@@ -53,6 +53,8 @@ class Friendlib {
 	function request($from_id,$to_id,$guid)
 	{
 			$CI =& get_instance();
+			
+		
 		$friend = array(
 			'to' => $to_id,
 			'from' => $from_id,
@@ -64,7 +66,7 @@ class Friendlib {
 		
 		$CI->db->insert('friend', $friend);
 	
-	
+		
 		$emaillib = new Emaillib();
 		$emaillib->friend_request($from_id,$to_id,$guid);
 		
@@ -85,7 +87,7 @@ class Friendlib {
 					'status'=> 1
 					));
 			*/
-			$sql = "SELECT * FROM friend WHERE ( friend.to = ".$user_id." OR friend.from = ".$user_id." )";
+			$sql = "SELECT * FROM friend WHERE ( tail_friend.to = ".$user_id." OR tail_friend.from = ".$user_id." )";
 			
 				$q = $CI->db->query($sql);
 		return $q->num_rows();
@@ -95,14 +97,29 @@ class Friendlib {
 	function get_friend_list($user_id)
 	{
 		$CI =& get_instance();
-				$sql1 = "SELECT friend.to as user_id,user.screen_name,user.firstname,user.lastname FROM
-		friend JOIN user ON user.id = friend.to WHERE friend.from = ". $user_id . " AND friend.status = 1";
-				$sql2 = " UNION SELECT friend.from as user_id,user.screen_name,firstname,user.lastname  FROM
-				friend JOIN user ON user.id = friend.from WHERE friend.to =" . $user_id." AND friend.status = 1";
+				$sql1 = "SELECT tail_friend.to as user_id, tail_user.screen_name, tail_user.firstname, tail_user.lastname FROM
+		tail_friend JOIN tail_user ON tail_user.id = tail_friend.to WHERE tail_friend.from = ". $user_id . " AND tail_friend.status = 1";
+				$sql2 = " UNION SELECT tail_friend.from as tail_user_id,tail_user.screen_name,tail_firstname,tail_user.lastname  FROM
+				tail_friend JOIN tail_user ON tail_user.id = tail_friend.from WHERE tail_friend.to =" . $user_id." AND tail_friend.status = 1";
 				$sql = $sql1 . $sql2;
 				$q = $CI->db->query($sql);
 			
 				return $q->result('array');
+	}
+	
+	function friend_guid($user1,$user2)
+	{
+		$CI =& get_instance();
+		$CI->db->where('from', $user1);
+		$CI->db->where('to', $user2);
+		$CI->db->select('guid');
+		$q= $CI->db->get('friend',1);
+		
+		if ($q->num_rows() > 0) {
+			return $q->first_row('array');
+		}else {
+			return 0;
+		}
 	}
 }
 

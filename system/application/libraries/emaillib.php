@@ -24,7 +24,7 @@ class Emaillib {
 			. 'Click link below to Activate your Account'
 			. "\r\n"
 			. "\r\n"
-			. $CI->config->item('base_url') . 'LinktoConfirm'
+			. $CI->config->item('base_url') . 'index.php/friend/request_list/'
 			. "\r\n"
 			. "\r\n"
 			. 'Thank you,'
