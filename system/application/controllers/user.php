@@ -46,7 +46,8 @@ class User extends Controller {
 				messages.from,
 				messages.text,
 				messages.datetime,
-				user.screen_name
+				user.screen_name,
+				user.small_thumbnail
 				');
 				
 			$this->db->order_by('datetime','desc'); 
@@ -87,7 +88,9 @@ class User extends Controller {
 						messages.from,
 						messages.text,
 						messages.datetime,
-						user.screen_name
+						user.screen_name,
+						user.small_thumbnail
+						
 						');
 
 					$this->db->order_by('datetime','desc'); 
@@ -136,5 +139,6 @@ class User extends Controller {
 			echo "Something wrong !!";
 		}
 	}
-
+	
+	
 }

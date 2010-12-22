@@ -61,7 +61,7 @@
 			<?php else : ?>
 				<div id="name">
 				<p>Serach another words.</p>
-				<p><a href="#">Or You can create new place.</a></p>
+				<p><?php echo anchor('/location','Or Click to create new Place.'); ?></p>
 				</div>
 		<?php endif; ?>
 	

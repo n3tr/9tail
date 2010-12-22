@@ -28,7 +28,8 @@
 			</div>
 		
 			<div id="useravatar_box">
-			<img src='http://localhost:8888/9tail/static-html/images/useravatar.png' />
+			<img src='<?php echo site_url("files/thumbnail/user/".$owner_data["thumbnail"]);?>' />
+			
 			</div><!-- end userinfo_wrap-->
 		
 		</div>
@@ -66,7 +67,10 @@
 								<div class="message">
 									<div class="message_content">
 										<div class="user_avatar">
-											<?php echo anchor('user/'.$row['screen_name'], "<img src='http://localhost:8888/9tail/static-html/images/useravatar.png' />");?>										
+										
+										
+										
+											<?php echo anchor('user/'.$row['screen_name'], "<img src=".site_url("files/thumbnail/user/".$row['small_thumbnail'])." />");?>										
 										</div>
 										<div class="message_text">
 											<?php echo anchor('user/'.$row['screen_name'], $row['screen_name'],array('class'=>'user_link'));?>

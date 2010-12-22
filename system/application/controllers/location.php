@@ -40,18 +40,18 @@ class Location extends Controller {
 		$lat = $this->input->post('lat_field', TRUE);
 		$lng = $this->input->post('lng_field', TRUE);
 	
-		
+		/*
 		$this->load->library('rest', array(
 		    'server' => 'http://maps.googleapis.com/maps/api/geocode/'
 		));
-		
+		*/
 	
 		
-		$q_text = 'json?latlng='.$lat.','.$lng.'&sensor=false';
-		$location = $this->rest->get($q_text);
-		
-			if ($location->status == 'OK') {
+		$q_text = 'http://maps.googleapis.com/maps/api/geocode/';
+		$q_text = $q_text . 'json?latlng='.$lat.','.$lng.'&sensor=false';
+		$location = json_decode((file_get_contents($q_text)));	
 			
+		if ($location->status == 'OK') {
 				redirect('/location/create_info/'.$lat.'/'.$lng);
 			}else if ($location->status == 'ZERO_RESULTS') {
 				echo "Something wrong";
@@ -61,14 +61,16 @@ class Location extends Controller {
 	
 	function create_info($lat,$lng)
 	{
-		$this->load->library('rest', array(
-		    'server' => 'http://maps.googleapis.com/maps/api/geocode/'
-		));
+		//$this->load->library('rest', array(
+		//    'server' => 'http://maps.googleapis.com/maps/api/geocode/'
+		//));
 		
 	
-		
-		$q_text = 'json?latlng='.$lat.','.$lng.'&sensor=false';
-		$location = $this->rest->get($q_text);
+		$q_text = 'http://maps.googleapis.com/maps/api/geocode/';
+	
+		$q_text = $q_text . 'json?latlng='.$lat.','.$lng.'&sensor=false';
+		$location = json_decode((file_get_contents($q_text)));	
+		//$location = $this->rest->get($q_text);
 		
 			if ($location->status == 'OK') {
 				$map_results = $location->results;
@@ -121,13 +123,15 @@ class Location extends Controller {
 		if($this->form_validation->run()){
 			$inputtext = $this->input->post('location_search_text');
 			$newtext = str_replace(" ", "+", $inputtext);
+			/*
 			$this->load->library('rest', array(
 			    'server' => 'http://maps.googleapis.com/maps/api/geocode/'
 			));
-		
-			
-			$q_text = 'json?address='.$newtext.'&sensor=false';
-			$location = $this->rest->get($q_text);
+		*/
+			$q_text = 'http://maps.googleapis.com/maps/api/geocode/';
+			$q_text = $q_text . 'json?address='.$newtext.'&sensor=false';
+			$location = json_decode((file_get_contents($q_text)));
+			//$location = $this->rest->get($q_text);
 
 				if ($location->status == 'OK') {
 					$map_results = $location->results;
@@ -241,6 +245,10 @@ class Location extends Controller {
 				
 				$this->db->insert('place_address', $place_address);
 				$data['owner_data'] =  $userdata;
+				
+				$this->db->where('guid',$guid);
+				$q = $this->db->get('place',1);
+				$data['place'] = $q->first_row('array');
 			$this->load->view('location/location_creaetd_success_view',$data);
 			
 		}else{

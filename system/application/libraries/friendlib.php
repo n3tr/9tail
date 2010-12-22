@@ -87,7 +87,7 @@ class Friendlib {
 					'status'=> 1
 					));
 			*/
-			$sql = "SELECT * FROM friend WHERE ( tail_friend.to = ".$user_id." OR tail_friend.from = ".$user_id." )";
+			$sql = "SELECT * FROM tail_friend WHERE ( tail_friend.to = ".$user_id." OR tail_friend.from = ".$user_id." )";
 			
 				$q = $CI->db->query($sql);
 		return $q->num_rows();
@@ -99,7 +99,7 @@ class Friendlib {
 		$CI =& get_instance();
 				$sql1 = "SELECT tail_friend.to as user_id, tail_user.screen_name, tail_user.firstname, tail_user.lastname FROM
 		tail_friend JOIN tail_user ON tail_user.id = tail_friend.to WHERE tail_friend.from = ". $user_id . " AND tail_friend.status = 1";
-				$sql2 = " UNION SELECT tail_friend.from as tail_user_id,tail_user.screen_name,tail_firstname,tail_user.lastname  FROM
+				$sql2 = " UNION SELECT tail_friend.from as tail_user_id,tail_user.screen_name,tail_user.firstname,tail_user.lastname  FROM
 				tail_friend JOIN tail_user ON tail_user.id = tail_friend.from WHERE tail_friend.to =" . $user_id." AND tail_friend.status = 1";
 				$sql = $sql1 . $sql2;
 				$q = $CI->db->query($sql);

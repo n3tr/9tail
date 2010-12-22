@@ -28,7 +28,7 @@ class Checkin extends Controller {
 			$low_lng = $lng - 0.009;
 			$up_lng = $lng + 0.009;
 			
-			$sql = 'SELECT 9tail_db.place.*,count(9tail_db.checkin.id) as checkin_count FROM 9tail_db.place LEFT JOIN 9tail_db.checkin ON checkin.place_id = place.id where place.lat > ? AND place.lat < ? AND place.lng > ? AND place.lng < ? group by place.id order by checkin_count desc limit 10';
+			$sql = 'SELECT tail_place.*,count(tail_checkin.id) as checkin_count FROM tail_place LEFT JOIN tail_checkin ON tail_checkin.place_id = tail_place.id where tail_place.lat > ? AND tail_place.lat < ? AND tail_place.lng > ? AND tail_place.lng < ? group by tail_place.id order by checkin_count desc limit 10';
 			$q = $this->db->query($sql,array($low_lat,$up_lat,$low_lng,$up_lng));
 			
 			//$this->db->where('lat >', $low_lat);
@@ -45,10 +45,15 @@ class Checkin extends Controller {
 	function searchlocation()
 	{
 		$text = $this->input->get('searchtext');
-		$sql = 'SELECT 9tail_db.place.*,count(9tail_db.checkin.id) as checkin_count FROM 9tail_db.place LEFT JOIN 9tail_db.checkin ON checkin.place_id = place.id where place.name LIKE "%'.$text.'%" group by place.id order by checkin_count desc limit 10';
+		
+		$sql = 'SELECT tail_place.*,count(tail_checkin.id) as checkin_count FROM tail_place LEFT JOIN tail_checkin ON tail_checkin.place_id = tail_place.id where tail_place.name LIKE "%'.$text.'%" group by tail_place.id order by checkin_count desc limit 10';
+		
+		
 		
 		$q = $this->db->query($sql);
 		//$q = $this->db->get('place',10);
+		
+		
 		$data['results'] = $q->result('array');
 		$this->load->view('checkin/get_location_result',$data);
 	}

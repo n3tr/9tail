@@ -162,6 +162,16 @@ ul#user_nav li a{
 	position: absolute;
 	background:#fff;
 	top:-40px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+
+#useravatar_box img{
+widows: 160px;
+height: 160px;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
 }
 
 #content{

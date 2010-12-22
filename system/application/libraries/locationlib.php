@@ -9,7 +9,7 @@ class Locationlib {
 	function get_last_checkin_of_user($user_id)
 	{
 		$CI =& get_instance();
-		$sql = 'SELECT * from 9tail_db.checkin JOIN 9tail_db.place ON place.id = checkin.place_id where checkin.user_id = ? order by checkin.datetime desc limit 1';
+		$sql = 'SELECT * from tail_checkin JOIN tail_place ON tail_place.id = tail_checkin.place_id where tail_checkin.user_id = ? order by tail_checkin.datetime desc limit 1';
 		$q = $CI->db->query($sql,$user_id);
 		if($q->num_rows() > 0){
 		return $q->first_row('array');	

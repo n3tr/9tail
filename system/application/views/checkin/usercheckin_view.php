@@ -42,25 +42,48 @@
 						
 					$('#search_location_submit').click(function(){
 					
-						
-						if($('#search_location_text').val() == ''){
+					
+						if($('#searchtext').val() == ''){
 							alert('Please, Input text into Search box.');
 							return false;
 						}
 						
-						$('#location_results').html("<img id='ajax_loader_location' src='http://localhost:8888/9tail/template_files/images/ajax-loader.gif' />");
-						var form_data = {
-								searchtext: $('#search_location_text').val(),
-								ajax: '1'		
-							};
 						
-					
-							$.get("<?php echo site_url('checkin/searchlocation'); ?>",form_data ,
-							function(data) {
+						
+						$('#location_results').html("<img id='ajax_loader_location' src='http://localhost:8888/9tail/template_files/images/ajax-loader.gif' />");
+						
+						
+
+							
+							//var text = $('#search_location_text').val();
+							//var url= '<?php echo site_url("checkin/searchlocation/"); ?>';
+							//url  += '/' + text;
+							/*
+							$.get(url,{searchtext:text},function(data) {
+								alert(data); break;
 							 $('#checkin_search_results').hide()
 							 $('#checkin_search_results').html(data).slideDown('slow');
 							});
+							*/
 
+							
+							var form_data = {
+								searchtext: $('#search_location_text').val(),
+								ajax: '1'
+							};
+					
+							$.ajax({
+								url: "<?php echo site_url("checkin/searchlocation/"); ?>",
+								type: 'GET',
+								data: form_data,
+								success: function(data) {
+									$('#checkin_search_results').hide();
+									 $('#checkin_search_results').html(data).slideDown('slow');
+								}
+								
+							});
+							
+							
 							return false;
 						
 					});
