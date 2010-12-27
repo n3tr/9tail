@@ -61,6 +61,19 @@ table {
 	text-align:center;
 }
 
+p{
+	margin-bottom:20px;
+}
+
+.float_right{
+	float:right;
+}
+
+.float_left{
+	float:left;
+}
+
+
 /*
 My CSS goes here
 */
@@ -166,6 +179,12 @@ ul#user_nav li a{
 	-webkit-border-radius: 5px;
 }
 
+#useravatar{
+	width:160px;
+	height:160px;
+	overflow:hidden;
+}
+
 
 #useravatar_box img{
 widows: 160px;
@@ -175,10 +194,12 @@ height: 160px;
 }
 
 #content{
+	padding-bottom:40px;
 	background:#fff url('./images/content_bg.png') repeat-y;
 	min-height:200px;
 	-webkit-border-radius: 0 0 5px 5px;
-		-moz-border-radius: 0 0 5px 5px;
+	-moz-border-radius: 0 0 5px 5px;
+	
 }
 
 #page{
@@ -191,6 +212,7 @@ height: 160px;
 
 #page_inner{
 	padding-top:50px;
+	margin-right:10px;
 }
 
 #message_post_box{
@@ -205,7 +227,7 @@ height: 160px;
 	width:386px;
 	color: #222222;
 	font: 14px/18px "Helvetica Neue",Arial,sans-serif;
-	height: 36px;
+
 	outline: medium none;
 	overflow-x: hidden;
  	overflow-y: auto;
@@ -214,6 +236,7 @@ height: 160px;
 	 -moz-border-radius: 4px 4px 4px 4px;
 	-webkit-border-radius: 5px;
 	float:left;
+	max-width:400px;
 }
 
 .submit_message_bth{
@@ -238,7 +261,7 @@ height: 160px;
 	cursor: pointer;
 
 }
-#messages{
+#messages,#tips{
 	padding-right:10px;
 }
 
@@ -246,6 +269,10 @@ height: 160px;
     border-bottom: 1px solid #CACACA;
     display: block;
     padding: 10px 0;
+}
+
+.new_message{
+	background:#EFEFEF;
 }
 
 .message_text{
@@ -722,14 +749,15 @@ Checkin View
 
 .blue_link{
 	-moz-border-radius: 4px 4px 4px 4px;
+		-webkit-border-radius: 4px 4px 4px 4px;
     background: none repeat scroll 0 0 #00ADEF;
     border: 1px solid #00ADEF;
     color: #FCF7F7;
     font-size: 13px;
     font-weight: bold;
-    height: 26px;
+    height: 13px;
     margin-top: 15px;
-    width: 90px;
+    min-width: 90px;
 	text-decoration:none;
 	padding:5px 7px;
 	margin-top:10px;
@@ -739,3 +767,110 @@ Checkin View
 background:#00a0e0;
 	
 }
+
+
+/* profile page tip */
+
+#msg_tip_nav{
+padding:0 30px;
+height:33px;
+border-bottom:1px solid #DDD;
+margin-bottom:20px;
+}
+
+#msg_tip_bar{
+position:relative;
+min-height:30px;
+}
+
+ul#msg_tip_bar li{
+	float:left;
+	
+}
+
+ul#msg_tip_bar li a{
+	border-left:1px solid #DDD;
+	border-right:1px solid #DDD;
+	border-top:1px solid #DDD;
+	color:#006FAC;
+	padding:8px 15px;
+	margin-right:10px;
+	display:block;
+	text-decoration:none;
+}
+
+ul#msg_tip_bar li a.current{
+	border-bottom:1px solid #fff;
+}
+
+#tips_post_wrap{
+	display:none;
+}
+
+#photo_nav{
+display:block;	
+}
+
+
+.single_image img{
+	max-height:600px;
+	max-width:600px;
+}
+
+
+
+
+/* album list view */
+
+#album_list{
+	padding:5px 10px;
+	margin-bottom:20px;
+}
+
+.album_list_item{
+	padding:5px;
+	float:left;
+	margin-right:20px;
+}
+
+.album_list_thumbnail{
+	
+	
+}
+
+.album_list_thumbnail img{
+	max-width:150px;
+	max-height:150px;
+	
+}
+
+/* photo album viewer */
+
+#photo_viewer{
+	padding:5px 10px;
+	margin-bottom:20px;
+}
+
+.photo_viewer_item{
+	padding:5px;
+	float:left;
+	margin-right:20px;
+}
+
+.photo_viewer_item img{
+	max-width:150px;
+	max-height:150px;
+	border:1px solid #999;
+	
+}
+
+#photo_nav{
+	margin-bottom:25px;
+	border-bottom:1px solid #CCC;
+	padding:10px;
+}
+
+#photo_nav .blue_link{
+	margin-top:-3px;
+}
+

@@ -12,14 +12,14 @@
 		<div id="main_wrap">
 			<div id="header_text_wrap" class="container">
 				<div id="header_text">
-					<h2>User not found:</h2>
+					<h2>Not found:</h2>
 				</div>
 			</div>
 			
 				<div id="page_wrap" class="container">
 					
 					<div class="page_box_wrap">
-						User not Found !!
+						 Page request is not found on server !!
 						
 					</div>
 						

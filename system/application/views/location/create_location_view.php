@@ -25,7 +25,7 @@
 				document.getElementsByName("lng_field")[0].value = position.coords.longitude;
 				
 				var imgloader = document.getElementById('ajax_loader_location');			
-				imgloader.src = 'http://localhost:8888/9tail/template_files/images/tick.png';
+				imgloader.src = '<?php echo site_url('');?>/template_files/images/tick.png';
 				var x = document.getElementsByName("usergeo_submit");
 				 x[0].style.visibility = 'visible';
 			}
@@ -54,7 +54,7 @@
 				<div class='page_box_wrap'>
 				<div class='page_box_3'>
 					<h3 class='page_box_header'>1. Search by Geolocation Support</h3>
-					<img id='ajax_loader_location' src='http://localhost:8888/9tail/template_files/images/ajax-loader.gif' />
+					<img id='ajax_loader_location' src='<?php echo site_url('');?>template_files/images/ajax-loader.gif' />
 					<?php
 					echo form_open('/location/searchbyuser','',array('lat_field'=>'','lng_field'=>''));
 					echo form_submit('usergeo_submit', 'Use your current location');

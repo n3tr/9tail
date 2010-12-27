@@ -43,11 +43,11 @@ class Message extends Controller {
 					$user = $q->first_row('array');
 					
 					redirect('/user/' . $user['screen_name']);
-				redirect('/user/');
+			
 			}
 		}else{
-			echo $userdata['logged_in']  . $userdata['user_id'] .$this->input->post('from');
-			
+			//echo $userdata['logged_in']  . $userdata['user_id'] .$this->input->post('from');
+			redirect('/login/','refresh');
 		}
 		
 			

@@ -15,11 +15,13 @@
 		<div id="usernav_wrap" class="container">
 			<ul id="user_nav">
 				<li><?php echo anchor('/user/'.$user_data['screen_name'],'Profile');?></li>
-				<li><a href="#">Photo</a></li>
+				<li><?php echo anchor('/photo/user/'.$user_data['screen_name'],'Photo');?></li>
 				<li><?php echo anchor('/friend/user/'.$user_data['screen_name'],'Friend');?></li>
 			</ul>
 			<div class="clear"></div>
 		</div>
+		
+		
 		
 		<div id="userinfo_wrap" class="container">
 
@@ -30,7 +32,9 @@
 		</div>
 	
 		<div id="useravatar_box">
-		<img src='http://localhost:8888/9tail/static-html/images/useravatar.png' />
+		<div id="useravatar">
+		<img src='<?php echo site_url("files/user_photo/thumb/".$user_data["thumbnail"]);?>' />
+		</div>
 		</div><!-- end userinfo_wrap-->
 	
 	</div>

@@ -17,9 +17,10 @@ class Friend extends Controller {
 		// This Query will return only who added Fix it !!
 		//
 		if($userdata['logged_in']){
-			$data['owner_data'] = $this->db->get_where('user', array('id'=>$userdata['user_id']),1);
+			$data['user_data'] =  $this->db->get_where('user', array('id'=>$userdata['user_id']),1)->first_row('array');
+			$data['owner_data'] = $this->db->get_where('user', array('id'=>$userdata['user_id']),1)->first_row('array');
 			$data['friend_list'] = $this->friendlib->get_friend_list($userdata['user_id']);
-			$this->load->view('friend_list_view', $data);
+			$this->load->view('friend/friend_list_view', $data);
 		}else{
 			redirect('/login/','Refresh');
 		}
@@ -31,17 +32,61 @@ class Friend extends Controller {
 	{
 		$userdata = $this->session->userdata('userdata');
 		if($userdata['logged_in']){
-			if($this->uri->segment(3) == FALSE){
+			if($this->uri->segment(3) == FALSE || $user_screen_name == $userdata['screen_name']){
 				redirect('/friend/','Refresh');
 			}else{
-				$this->db->select('id');
+				$this->db->select('*');
 				$this->db->where('screen_name', $user_screen_name);
 				$q = $this->db->get('user',1);
-				$user_id = $q->first_row()->id;
+				$user = $q->first_row('array');
+				$owner_user = $this->db->get_where('user', array('id'=>$userdata['user_id']),1)->first_row('array');
 				
-				$data['owner_data'] = $this->db->get_where('user', array('id'=>$userdata['user_id']),1);
-				$data['friend_list'] = $this->friendlib->get_friend_list($user_id);
-				$this->load->view('friend_list_view', $data);
+				
+				$data['owner_data'] = $owner_user;
+				
+				if($q->num_rows() == 0){
+					show_404('page');
+					//	$this->load->view('profile/user_not_found',$data);
+						return;
+				}
+				
+				$data['user_data'] = $q->first_row('array');
+				
+				$data['friend_list'] = $this->friendlib->get_friend_list($user['id']);
+				
+				
+			
+				
+				$data['friend_count'] = $this->friendlib->get_friend_count($user['id']);
+				
+				if ($this->friendlib->check_friend($userdata['user_id'],$user['id']) == 2){
+					
+					
+					$this->load->view('friend/friend_list_view',$data);
+					
+					
+				// Check Pendding
+				}else if ($this->friendlib->check_friend($userdata['user_id'],$user['id']) == 1) {
+					
+					//Check user request
+					if ($this->friendlib->who_added($userdata['user_id'],$user['id']) == $userdata['user_id']) {
+						$data['friend_pedding'] = 1;
+						$this->load->view('profile/pedding_request',$data);
+					}else {
+						$friend_guid = $this->friendlib->friend_guid($user['id'],$userdata['user_id']);
+					
+						$data['friend_guid'] = $friend_guid;
+						$this->load->view('profile/pedding_request',$data);
+						
+					}
+					
+					// not Friend
+				}else {
+					$this->load->view('profile/pedding_request',$data);
+				}
+				
+				
+			
 			}
 		}else {
 			redirect('/login','Refresh');

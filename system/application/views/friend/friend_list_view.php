@@ -25,8 +25,8 @@
 
 		<div id="userinfo">
 			<h2 class="user_screen_name"><?php echo $user_data['screen_name']; ?></h2>
-			<p class="user_full_name"><?php echo $user_data['firstname'] . ' ' . $user_data['lastname'];?></p>
-			<h2><?php echo anchor('/friend/','Friend: ' . $friend_count . ' People');?></h2>
+			<span class="user_full_name"><?php echo $user_data['firstname'] . ' ' . $user_data['lastname'];?></span>
+
 		</div>
 	
 		<div id="useravatar_box">
@@ -41,33 +41,12 @@
 	<div id="content" class="container">
 		<div id="page">
 			<div id="page_inner">
-				
-				<div id="message_post_box">
-					<?php
-					$hidden = array(
-						'from' => $owner_data['id'],
-						'to' => $user_data['id']
-						);
-					$fval = array(
-						'value'=>'Post',
-						'type'=>'submit',
-						'name'=>'post_message_submit',
-						'class'=>'submit_message_bth'
-						);
-						echo form_open('/message/post','', $hidden);
-						echo '<textarea name="text" id="msg_text"></textarea>';
-					
-						echo form_submit($fval);
-						echo form_close();
-					?>
-					<div class="clear"></div>
-				</div>
 
 	
 					<div id="messages">
-					<?php if (count($messages) > 0) : ?>
+					<?php if (count($friend_list) > 0) : ?>
 			
-						<?php foreach ($messages as $row) : ?>
+						<?php foreach ($friend_list as $row) : ?>
 			
 							<div class="message">
 								<div class="message_content">
@@ -78,7 +57,12 @@
 									</div>
 									<div class="message_text">
 										<?php echo anchor('user/'.$row['screen_name'], $row['screen_name'],array('class'=>'user_link'));?>
-										<?php echo '<p>' . $row['text'] .'</p>' .' <i>'. $row['datetime'] . '</i>';?>								
+										<p><?php echo $row['firstname'] . '  '. $row['lastname']; ?></p>	
+										<?php 
+										if($user_data['id'] == $owner_data['id']){
+												echo anchor('friend/remove'.$row['user_id'],'Remove from friend',array('class'=>'float_right blue_link'));
+										}				
+										 ?>						
 									</div>
 									<div class="clear"></div>
 								</div>
@@ -93,44 +77,12 @@
 					
 					<div class="widget_box">
 						<h3 class="widget_title">Widget Title</h3>
-							<?php 
-								if(!$last_checkin ==0){
-									$image = '<img src="http://maps.google.com/maps/api/staticmap?center=' . 
-									$last_checkin['lat'] .
-									 ',' . 
-									$last_checkin['lng'] .
-									'&zoom=15&size=340x160&
-									markers=color:blue|label:P|'.
-									$last_checkin['lat'] .
-									 ',' . 
-									$last_checkin['lng'] .
-									'&maptype=terrain&sensor=false" />';
-									echo anchor('location/place/'. $last_checkin['place_id'],$image);
-								}else{
-									echo '<p>This user not check-in yet.</p>';
-								}
-
-							?>
+						<img src="./images/map_preview.png"/>
 					</div>
-					<div class="widget_box">
-						<h3 class="widget_title">Widget Title</h3>
-						
-						<?php if(!$user_in_location ==0): ?>
-							<?php foreach ($user_in_location as $user) :?>
-							<a href="<?php echo site_url('/user/'.$user['screen_name'])?>">
-							<img src="<?php echo site_url('files/user_photo/thumb/'.$user['thumbnail']); ?>" width='100' height='100' />
-							</a>
-						<?php endforeach;?>
-					<?php endif;?>
-						
-					</div>
-					<!--
 					<div class="widget_box">
 						<h3 class="widget_title">Widget Title</h3>
 						<img src="./images/map_preview.png"/>
 					</div>
-					
-					-->
 				</div>
 				<div class="clear"></div>
 

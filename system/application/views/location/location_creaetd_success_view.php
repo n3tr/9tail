@@ -24,9 +24,9 @@
 				<div class='page_box_1'>
 					<h3 class='page_box_header'>Your Location was Created.</h3>
 					
-					<p>Start Check-in to your Location : <?php echo anchor('/checkin/place/'.$location['id'],'Click here to Check-in to ' .$location['name']); ?></p>
+					<p>Start Check-in to your Location : <?php echo anchor('/checkin/place/'.$place['id'],'Click here to Check-in to ' .$place['name']); ?></p>
 					
-					<p>You can visit Location Page Here : <?php echo anchor('/location/'.$location['id'],$location['name']); ?></p>
+					<p>You can visit Location Page Here : <?php echo anchor('/location/'.$place['id'],$place['name']); ?></p>
 				</div>
 			
 				<div class="clear"></div>

@@ -111,7 +111,7 @@
 					<div class="page_box_wrap">
 						<div class="checkin_list_box center">
 							<h3 class='page_box_header'>Use Geo-location API to Checkin:</h3>
-							<img id='ajax_loader_location' src='http://localhost:8888/9tail/template_files/images/ajax-loader.gif' />
+							<img id='ajax_loader_location' src='<?php echo site_url('');?>template_files/images/ajax-loader.gif' />
 							<div id="checkin_current_results">
 
 							</div>

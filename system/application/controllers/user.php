@@ -53,11 +53,32 @@ class User extends Controller {
 			$this->db->order_by('datetime','desc'); 
 			$q = $this->db->get();
 			
+			$last_checkin = $this->locationlib->get_last_checkin_of_user($userdata['user_id']);
+			
+			$this->db->from('tip');
+			$this->db->join('user', 'user.id = tip.user_id');
+			$this->db->where('place_id', $last_checkin['place_id']);
+			$this->db->select('
+			tip.id,
+			tip.text,
+			tip.datetime,
+			user.screen_name,
+			user.small_thumbnail
+			');
+			$this->db->order_by('datetime','desc');
+			$tip = $this->db->get();
+
+			
 			//print_r($q->result('array'));die();
-		
+			
+			$data['tips'] = $tip->result('array');
 			$data['messages'] = $q->result('array');
 			$data['friend_count'] = $this->friendlib->get_friend_count($userdata['user_id']);
-			$data['last_checkin'] = $this->locationlib->get_last_checkin_of_user($userdata['user_id']);
+			$data['last_checkin'] = $last_checkin;
+			$data['user_in_location'] = $this->locationlib->who_checkin_in($last_checkin['place_id']);
+			
+			
+			
 			$this->load->view('profile/owner_user_view',$data);
 			
 		}else if($this->uri->segment(2) == TRUE){
@@ -100,9 +121,12 @@ class User extends Controller {
 
 					$data['messages'] = $q->result('array');
 					$data['friend_count'] = $this->friendlib->get_friend_count($user_data['id']);
-					$data['last_checkin'] = $this->locationlib->get_last_checkin_of_user($user_data['id']);
-				
+					$last_checkin = $this->locationlib->get_last_checkin_of_user($user_data['id']);
+					$data['last_checkin'] = $last_checkin;
+					$data['user_in_location'] = $this->locationlib->who_checkin_in($last_checkin['place_id']);
 					// is Friend
+					
+				
 					if ($this->friendlib->check_friend($userdata['user_id'],$user_data['id']) == 2){
 						
 						
@@ -138,6 +162,34 @@ class User extends Controller {
 		}else{
 			echo "Something wrong !!";
 		}
+	}
+	
+	function set_profile_image($photo_id)
+	{
+		$userdata = $this->session->userdata('userdata');
+		
+		if(!$userdata['logged_in']){
+			redirect('/login','refresh');
+			return;
+		}
+		
+		$photo = $this->db->get_where('user_photo', array('id'=>$photo_id), 1)->first_row('array');
+		if($userdata['user_id'] == $photo['user_id']){
+			
+			
+			
+			$user = array(
+				'thumbnail' => $photo['thumb_path'], 
+				'small_thumbnail'=> $photo['thumb_path']
+				);
+			
+			$this->db->where('id', $userdata['user_id']);
+			$this->db->update('user', $user);
+			redirect('/photo/id/'.$photo_id,'refresh');
+		}
+		
+		
+		
 	}
 	
 	
