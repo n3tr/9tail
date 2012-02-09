@@ -1,0 +1,7 @@
+All source code from 9tail.com, it was developed in PHP and Codeigniter Framework
+ 
+I have developed this project for Final Project Subject since 2010-2011 while I studying in 4th years in Computer Science.
+
+9tail is Small Social networking system allow user to register, request friend to other, create location and checkin into location, post message to our wall or friend wall.
+
+Notices: Do not try to connect database or email by using account i wrote in source code, it will not work!.
