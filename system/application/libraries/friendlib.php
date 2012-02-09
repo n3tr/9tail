@@ -4,7 +4,7 @@ class Friendlib {
 
 	// return 0 if not friend
 	// return 1 if pendding
-	// return 2 if freind.
+	// return 2 if freinded.
 	// 
 
     function check_friend($from_user,$to_user)

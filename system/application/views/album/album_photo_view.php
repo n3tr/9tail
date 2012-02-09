@@ -39,6 +39,13 @@
 
 								<div class="page_box_wrap">
 									
+									<div id='photo_nav'>
+									<?php echo anchor('/photo/user/'.$user_data['screen_name'],'Back to Photo',array('class'=>'float_left blue_link')); ?>
+									
+									
+										<div class="clear"></div>
+									</div>
+									
 									<?php if(isset($photos)) : ?>
 									
 									<div id="photo_viewer">

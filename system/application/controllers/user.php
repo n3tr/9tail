@@ -97,9 +97,7 @@ class User extends Controller {
 					$user_data = $q->first_row('array');
 					$data['user_data'] = $user_data;
 					
-
-
-
+					
 					$this->db->from('messages');
 					$this->db->join('user', 'user.id = messages.from');
 					$this->db->where('to', $user_data['id']);
@@ -115,21 +113,23 @@ class User extends Controller {
 						');
 
 					$this->db->order_by('datetime','desc'); 
-					$q = $this->db->get();
+					$msg = $this->db->get();
 
 				//	print_r($q->result('array'));die();
 
-					$data['messages'] = $q->result('array');
+					$data['messages'] = $msg->result('array');
 					$data['friend_count'] = $this->friendlib->get_friend_count($user_data['id']);
 					$last_checkin = $this->locationlib->get_last_checkin_of_user($user_data['id']);
 					$data['last_checkin'] = $last_checkin;
+					
+					// Check who been in location
 					$data['user_in_location'] = $this->locationlib->who_checkin_in($last_checkin['place_id']);
 					// is Friend
 					
 				
 					if ($this->friendlib->check_friend($userdata['user_id'],$user_data['id']) == 2){
 						
-						
+						// If Two users was friended
 						$this->load->view('profile/user_view',$data);
 						
 						
@@ -141,8 +141,9 @@ class User extends Controller {
 							$data['friend_pedding'] = 1;
 							$this->load->view('profile/pedding_request',$data);
 						}else {
+							
 							$friend_guid = $this->friendlib->friend_guid($user_data['id'],$userdata['user_id']);
-						
+							
 							$data['friend_guid'] = $friend_guid;
 							$this->load->view('profile/pedding_request',$data);
 							

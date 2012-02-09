@@ -60,7 +60,7 @@
 										<p><?php echo $row['firstname'] . '  '. $row['lastname']; ?></p>	
 										<?php 
 										if($user_data['id'] == $owner_data['id']){
-												echo anchor('friend/remove'.$row['user_id'],'Remove from friend',array('class'=>'float_right blue_link'));
+												echo anchor('friend/remove/'.$row['user_id'],'Remove from friend',array('class'=>'float_right blue_link'));
 										}				
 										 ?>						
 									</div>

@@ -183,7 +183,7 @@ class Photo extends Controller {
 		$this->load->library('upload', $uploadCon);
 		
 		if (!$this->upload->do_upload()) {
-			$error = array('error' => $this->upload->display_errors());
+			$error = array('error1' => $this->upload->display_errors());
 			print_r($error);
 		}else {
 			$uploadData = array('upload_data' => $this->upload->data());
@@ -277,20 +277,40 @@ class Photo extends Controller {
 							redirect('album/id/' . $user_photo['album_id'],'refresh');
 							
 						}else{
-							echo $this->image_lib->display_errors('<p>', '</p>');
+							echo $this->image_lib->display_errors('<p>Error2', '</p>');
 						}
 						
 						
 					
 					}else {
-						echo $this->image_lib->display_errors('<p>', '</p>');
+						echo $this->image_lib->display_errors('<p>Error3', '</p>');
 					}
 				
 			}else{
-				echo $this->image_lib->display_errors('<p>', '</p>');
+				echo $this->image_lib->display_errors('<p>Error4', '</p>');
 			}
 			
 		}
+	}
+	
+	function delete($photo_id=FALSE)
+	{
+		
+		$sessiondata = $this->session->userdata('userdata');
+		if (!$sessiondata['logged_in']) {
+			redirect('/login/');
+		}
+		
+		$user_data = $this->db->get_where('user', array('id'=>$sessiondata['user_id']), 1)->first_row('array');
+		$photo_data = $this->db->get_where('user_photo', array('id'=>$photo_id), 1)->first_row('array');
+		
+		if($user_data['id'] == $photo_data['user_id']){
+			$this->db->delete('user_photo',array('id'=>$photo_data['id']));
+			redirect('album/id/'.$photo_data['album_id']);
+		}else {
+			show_404();
+		}
+		
 	}
 
 }

@@ -28,7 +28,7 @@
 		<div id="userinfo">
 			<h2 class="user_screen_name"><?php echo $user_data['screen_name']; ?></h2>
 			<p class="user_full_name"><?php echo $user_data['firstname'] . ' ' . $user_data['lastname'];?></p>
-			<h2><?php echo anchor('/friend/','Friend: ' . $friend_count . ' People');?></h2>
+		
 		</div>
 	
 		<div id="useravatar_box">
@@ -40,10 +40,12 @@
 	</div>
 	
 	<div id="page_wrap" class="container center">
-		<?php if(isset($friend_guid) && $friend_guid['guid'] != 0) :
-			echo anchor('friend/confirm/'. $friend_guid['guid'] .'/'.$user_data['screen_name'],'Click to accept '.$user_data['screen_name'].' to be your friend.');
+		<?php if(isset($friend_guid) && $friend_guid != 0) : ?>
+		
+		<?php echo anchor('friend/confirm/'. $friend_guid['guid'] .'/'.$user_data['screen_name'],'Click to accept '.$user_data['screen_name'].' to be your friend.');
 	 	elseif(isset($friend_pedding) && $friend_pedding != 0):?>
 			<p>Waiting for User Accept</p>
+	
 		<?php else:
 			echo anchor('/friend/request_friend/'.$user_data['screen_name'],'Sent friend request to '.$user_data['screen_name']);
 	 	endif;?>

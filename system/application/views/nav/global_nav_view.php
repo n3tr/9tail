@@ -1,3 +1,7 @@
+<?php
+//	$friend_req = $this->db->get_where('friend', array('to'=>$owner_data['id'],'status'=>0))->num_rows();
+?>
+
 <div id="global_nav_wrap">
 	<div id="global_nav" class="container">
 		<a href="<?php echo base_url();?>" class="float_left"><?php echo img(site_url('template_files/images/mini-logo.png'));?></a>

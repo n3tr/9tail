@@ -874,3 +874,87 @@ display:block;
 	margin-top:-3px;
 }
 
+h2.content_title{
+	color:#333333;
+	font-size:18px;
+	border-bottom:1px solid #AAA;
+	margin-bottom:10px;
+	line-height:24px;
+	padding:0 0 5px;
+}
+
+#main_map{
+	margin:0 0 15px;
+}
+
+#placeinfo{
+	color: #464646;
+	    margin-left: 360px;
+	    padding-top: 25px;
+}
+
+.place_info_widget ul li{
+
+	font-size:14px;
+	line-height:18px;
+}
+
+.place_photo_box{
+	width:100px;
+	height:100px;
+	overflow:hidden;
+	float:left;
+	margin-left:10px;
+	margin-bottom:10px;
+	text-align:center;
+	display:block;
+}
+.place_photo_box img{
+
+	max-height:125px;
+	overflow:hidden;
+	text-align:center;
+	margin:0 auto;
+	vertical-align:middle;
+
+}
+
+#photo_viewer_box {
+	margin-bottom:20px;
+}
+
+#place_photo_action{
+	display:block;
+}
+
+#like_bth{
+	
+	float:left;
+	padding:7px 7px;
+	background:#00adef;
+	text-align: center;
+	border:1px solid #00adef;
+	color:#fcf7f7;
+	-moz-border-radius: 4px 4px 4px 4px;
+		-webkit-border-radius: 5px;
+	font-size:13px;
+	font-weight: bold;
+	float:left;
+	margin-left:10px;
+	text-decoration:none;
+}
+
+#like_bth:hover{
+	background:#00a0e0;
+		border:1px solid #00adef;
+	cursor: pointer;	
+	
+}
+
+
+#photo_viewer_box img{
+	max-width:580px;
+	border:1px solid #444;
+}
+
+

@@ -31,7 +31,7 @@
 | URI contains no data. In the above example, the "welcome" class
 | would be loaded.
 |
-|	$route['scaffolding_trigger'] = 'scaffolding';
+|
 |
 | This route lets you set a "secret" word that will trigger the
 | scaffolding feature for added security. Note: Scaffolding must be
@@ -40,8 +40,9 @@
 |
 */
 
+$route['scaffolding_trigger'] = 'database';
 $route['default_controller'] = "login";
-$route['scaffolding_trigger'] = "";
+//$route['scaffolding_trigger'] = "adminaccess";
 $route['user/([a-z\d-_]+)'] = "user/profile/$1";
 
 /* End of file routes.php */

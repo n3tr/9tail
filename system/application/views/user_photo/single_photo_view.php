@@ -53,6 +53,9 @@
 										<?php echo img(site_url('/files/user_photo/'.$photo['path'])); ?>
 										
 									</div>
+										<?php if($user_data['id'] == $owner_data['id']) : ?>
+											<div><?php echo anchor('photo/delete/'.$photo['id'],'Delete This Photo'); ?></div>
+									<?php endif; ?>
 									<?php else: ?>
 
 										<p>You not have any photo</p>

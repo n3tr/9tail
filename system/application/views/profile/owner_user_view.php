@@ -3,9 +3,10 @@
 	<head>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
 		<title><?php echo $owner_data['screen_name']?>'s Profile : Home</title>
-		<?php echo link_tag('template_files/style.css');?>
-			<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
 		
+		<?php echo link_tag('template_files/style.css');?>
+		
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
 		<script type="text/javascript" charset="utf-8">
 			$(document).ready(function() {
 				
@@ -26,7 +27,8 @@
 					$('#message_wrap').show();
 					return false;
 				});
-				
+			
+			
 					$('#post_tip_submit').click(function(){
 						if($('#tip_text').val() == ''){
 							
@@ -71,10 +73,32 @@
 								return false;
 							}
 						});
+						
+						$('.user_report').click(function(){
+						
+								
+									$('#overlay').fadeIn('medium');
+										$('#user_report_box').fadeIn('medium');
+								return false;
+							
+						});
+						
+						$('#overlay').click(function(){
+							$('#user_report_box').fadeOut('medium');
+							$('#overlay').fadeOut('medium');
+							return false;
+						});
 			
 			});
 		</script>
-		
+				<style>
+				label{
+					display:block;
+				}
+				textarea{
+					display:block;
+				}
+				</style>
 	</head>
 	<body id="profile">
 		
@@ -96,8 +120,8 @@
 
 			<div id="userinfo">
 				<h2 class="user_screen_name"><?php echo $owner_data['screen_name']; ?></h2>
-				<p class="user_full_name"><?php echo $owner_data['firstname'] . ' ' . $owner_data['lastname'];?></p>
-				<h2><?php echo anchor('/friend/','Friend: ' . $friend_count . ' People');?></h2>
+				<span class="user_full_name"><?php echo $owner_data['firstname'] . ' ' . $owner_data['lastname'];?></span>
+			
 			</div>
 		
 			<div id="useravatar_box">
@@ -299,6 +323,54 @@
 					<div class="clear"></div>
 					</div>
 			</div> <!--end main wrap -->
+			
+			<div id="footer_wrap">
+				<div class="container" id="footer" >
+					<a href="#" class="user_report">Report to Administrator</a>
+					
+					
+				</div>
+			</div>
+			
+			<div class="overlay" id="overlay" style="display:none;"></div>
+			
+			<div class="box" id="user_report_box">
+			
+			
+		
+			 <h1>Report to Administrator</h1>
+				<div id="user_report_textbox">
+					<?php
+					/*
+					$hidden = array(
+						'tip_place_id' => $place_data['id'],
+						'tip_user_id' => $user_data['id'] 
+						);*/
+					$pval = array(
+						'value'=>'Submit',
+						'type'=>'submit',
+						'name'=>'upload_photo_submit',
+						'class'=>'submit_message_bth',
+						'id'=>'upload_photo_submit'
+						);
+					
+					echo form_open_multipart('location/photo_upload');
+					echo form_label('Title');
+					echo form_input('title');
+					echo form_label('Text');
+					?>
+					<textarea name="text" rows="8" cols="30"></textarea>
+					<?php
+					echo form_hidden('url');
+					echo form_submit($pval);
+					echo form_close();
+					?>
+					<div class="clear"></div>
+				</div><!-- message_post_box -->
+
+
+
+			</div>
 			
 		 
 	

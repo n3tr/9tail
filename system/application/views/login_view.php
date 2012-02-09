@@ -38,8 +38,8 @@
 					
 				<div class="clear"></div>
 					<ul class="login_option">
-						<li><a href="#">Forgot password,click here</a></li>
-						<li><a href="#"></a></li>
+						<li><?php echo anchor('login/forgot/','Forgot password,click here');?></li>
+				
 					</ul>
 				<div class="clear">	</div>					
 			</div>

@@ -25,8 +25,8 @@
 
 		<div id="userinfo">
 			<h2 class="user_screen_name"><?php echo $user_data['screen_name']; ?></h2>
-			<p class="user_full_name"><?php echo $user_data['firstname'] . ' ' . $user_data['lastname'];?></p>
-			<h2><?php echo anchor('/friend/','Friend: ' . $friend_count . ' People');?></h2>
+			<span class="user_full_name"><?php echo $user_data['firstname'] . ' ' . $user_data['lastname'];?></span>
+		
 		</div>
 	
 		<div id="useravatar_box">
@@ -92,7 +92,7 @@
 				<div id="sidebar">
 					
 					<div class="widget_box">
-						<h3 class="widget_title">Widget Title</h3>
+						<h3 class="widget_title">You're Here</h3>
 							<?php 
 								if(!$last_checkin ==0){
 									$image = '<img src="http://maps.google.com/maps/api/staticmap?center=' . 
@@ -113,7 +113,7 @@
 							?>
 					</div>
 					<div class="widget_box">
-						<h3 class="widget_title">Widget Title</h3>
+						<h3 class="widget_title">Who stay here</h3>
 						
 						<?php if(!$user_in_location ==0): ?>
 							<?php foreach ($user_in_location as $user) :?>

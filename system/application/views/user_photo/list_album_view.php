@@ -63,7 +63,7 @@
 									
 									<?php else: ?>
 
-										<p>No have any Album</p>
+										<p>No have any Album Yet.</p>
 										
 										<?php if($user_data['id'] == $owner_data['id']) :?>
 										

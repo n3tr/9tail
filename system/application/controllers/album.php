@@ -82,6 +82,7 @@ $userdata = $this->session->userdata('userdata');
 			
 				$album = $q->first_row('array');
 				
+				$userdata = $this->db->get_where('user', array('id'=>$album['user_id']), 1);
 			
 				
 				$data['album'] = $album;
