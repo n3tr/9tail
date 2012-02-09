@@ -42,9 +42,9 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'ninetail_db_v1';
-$db['default']['password'] = 'pojZN0J3';
-$db['default']['database'] = 'ninetail_db_v2';
+$db['default']['username'] = '';
+$db['default']['password'] = '';
+$db['default']['database'] = '';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = 'tail_';
 $db['default']['pconnect'] = TRUE;
